@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace QuanLyKhachSan.GUI
+{
+    public partial class UCQuanLyLoaiPhong : UserControl
+    {
+        public UCQuanLyLoaiPhong()
+        {
+            InitializeComponent();
+        }
+
+        private void UCQuanLyLoaiPhong_Load(object sender, EventArgs e)
+        {
+            dgvLoaiPhong.ReadOnly = true;
+            dgvLoaiPhong.AllowUserToAddRows = false;
+            dgvLoaiPhong.AllowUserToDeleteRows = false;
+            dgvLoaiPhong.AllowUserToResizeColumns = false;
+            dgvLoaiPhong.AllowUserToResizeRows = false;
+            dgvLoaiPhong.MultiSelect = false;
+            dgvLoaiPhong.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvLoaiPhong.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvLoaiPhong.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvLoaiPhong.RowHeadersVisible = false;
+            dgvLoaiPhong.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvLoaiPhong.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Cấu hình Header (Màu xanh dương chủ đạo)
+            dgvLoaiPhong.EnableHeadersVisualStyles = false;
+            dgvLoaiPhong.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 122, 204);
+            dgvLoaiPhong.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvLoaiPhong.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            dgvLoaiPhong.ColumnHeadersHeight = 40;
+
+            // Cấu hình nội dung (Màu trắng)
+            dgvLoaiPhong.DefaultCellStyle.Font = new Font("Segoe UI", 12);
+            dgvLoaiPhong.BackgroundColor = Color.White;
+            dgvLoaiPhong.BorderStyle = BorderStyle.None;
+            dgvLoaiPhong.DefaultCellStyle.BackColor = Color.White;
+            dgvLoaiPhong.DefaultCellStyle.ForeColor = Color.Black;
+
+            // Cấu hình dòng xen kẽ (Xanh dương nhạt)
+            dgvLoaiPhong.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(230, 242, 250);
+
+            // Cấu hình khi chọn dòng (Màu cam làm điểm nhấn)
+            Color selectColor = Color.FromArgb(255, 153, 51);
+            dgvLoaiPhong.DefaultCellStyle.SelectionBackColor = selectColor;
+            dgvLoaiPhong.DefaultCellStyle.SelectionForeColor = Color.White;
+            dgvLoaiPhong.RowsDefaultCellStyle.SelectionBackColor = selectColor;
+            dgvLoaiPhong.RowsDefaultCellStyle.SelectionForeColor = Color.White;
+
+            // Cấu hình lưới và các mục khác
+            dgvLoaiPhong.GridColor = Color.FromArgb(220, 220, 220);
+            dgvLoaiPhong.CurrentCell = null;
+            dgvLoaiPhong.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 122, 204);
+            dgvLoaiPhong.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+        }
+    }
+}
