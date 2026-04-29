@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             label2 = new Label();
-            richTextBox1 = new RichTextBox();
-            comboBox1 = new ComboBox();
+            rtxtMoTa = new RichTextBox();
+            cbxLoaiPhong = new ComboBox();
             label7 = new Label();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
             groupBox2 = new GroupBox();
+            numSoNguoi = new NumericUpDown();
+            numGia = new NumericUpDown();
             btnXoa = new Button();
             btnThem = new Button();
             btnSua = new Button();
             dgvLoaiPhong = new DataGridView();
-            numericUpDown1 = new NumericUpDown();
-            numericUpDown2 = new NumericUpDown();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numSoNguoi).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numGia).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvLoaiPhong).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -58,23 +58,23 @@
             label2.TabIndex = 11;
             label2.Text = "Danh sách các loại phòng:";
             // 
-            // richTextBox1
+            // rtxtMoTa
             // 
-            richTextBox1.BorderStyle = BorderStyle.None;
-            richTextBox1.Location = new Point(124, 197);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(195, 64);
-            richTextBox1.TabIndex = 14;
-            richTextBox1.Text = "";
+            rtxtMoTa.BorderStyle = BorderStyle.None;
+            rtxtMoTa.Location = new Point(124, 197);
+            rtxtMoTa.Name = "rtxtMoTa";
+            rtxtMoTa.Size = new Size(195, 64);
+            rtxtMoTa.TabIndex = 14;
+            rtxtMoTa.Text = "";
             // 
-            // comboBox1
+            // cbxLoaiPhong
             // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(125, 42);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(196, 36);
-            comboBox1.TabIndex = 12;
+            cbxLoaiPhong.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxLoaiPhong.FormattingEnabled = true;
+            cbxLoaiPhong.Location = new Point(125, 42);
+            cbxLoaiPhong.Name = "cbxLoaiPhong";
+            cbxLoaiPhong.Size = new Size(196, 36);
+            cbxLoaiPhong.TabIndex = 12;
             // 
             // label7
             // 
@@ -118,10 +118,10 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(numericUpDown2);
-            groupBox2.Controls.Add(numericUpDown1);
-            groupBox2.Controls.Add(richTextBox1);
-            groupBox2.Controls.Add(comboBox1);
+            groupBox2.Controls.Add(numSoNguoi);
+            groupBox2.Controls.Add(numGia);
+            groupBox2.Controls.Add(rtxtMoTa);
+            groupBox2.Controls.Add(cbxLoaiPhong);
             groupBox2.Controls.Add(label7);
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(label5);
@@ -135,6 +135,20 @@
             groupBox2.TabIndex = 10;
             groupBox2.TabStop = false;
             groupBox2.Text = "Thông tin loại phòng";
+            // 
+            // numSoNguoi
+            // 
+            numSoNguoi.Location = new Point(124, 142);
+            numSoNguoi.Name = "numSoNguoi";
+            numSoNguoi.Size = new Size(196, 34);
+            numSoNguoi.TabIndex = 16;
+            // 
+            // numGia
+            // 
+            numGia.Location = new Point(125, 92);
+            numGia.Name = "numGia";
+            numGia.Size = new Size(196, 34);
+            numGia.TabIndex = 15;
             // 
             // btnXoa
             // 
@@ -187,20 +201,6 @@
             dgvLoaiPhong.Size = new Size(680, 581);
             dgvLoaiPhong.TabIndex = 8;
             // 
-            // numericUpDown1
-            // 
-            numericUpDown1.Location = new Point(125, 92);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(196, 34);
-            numericUpDown1.TabIndex = 15;
-            // 
-            // numericUpDown2
-            // 
-            numericUpDown2.Location = new Point(124, 142);
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(196, 34);
-            numericUpDown2.TabIndex = 16;
-            // 
             // UCQuanLyLoaiPhong
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
@@ -216,9 +216,9 @@
             Load += UCQuanLyLoaiPhong_Load;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numSoNguoi).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numGia).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvLoaiPhong).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -226,8 +226,8 @@
         #endregion
 
         private Label label2;
-        private RichTextBox richTextBox1;
-        private ComboBox comboBox1;
+        private RichTextBox rtxtMoTa;
+        private ComboBox cbxLoaiPhong;
         private Label label7;
         private Label label6;
         private Label label5;
@@ -237,7 +237,7 @@
         private Button btnThem;
         private Button btnSua;
         private DataGridView dgvLoaiPhong;
-        private NumericUpDown numericUpDown2;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown numSoNguoi;
+        private NumericUpDown numGia;
     }
 }

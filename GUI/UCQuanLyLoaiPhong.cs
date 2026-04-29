@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyKhachSan.BUS;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,33 @@ namespace QuanLyKhachSan.GUI
 {
     public partial class UCQuanLyLoaiPhong : UserControl
     {
+        private LoaiPhong_BUS loaiPhong_BUS = new LoaiPhong_BUS();
         public UCQuanLyLoaiPhong()
         {
             InitializeComponent();
+            LoadData();
+        }
+        public void LoadData()
+        {
+            try
+            {
+                var data = loaiPhong_BUS.GetAllLoaiPhong();
+                if (data != null && data.Count > 0)
+                {
+                    dgvLoaiPhong.DataSource = data;
+                    cbxLoaiPhong.DataSource = data;
+                    cbxLoaiPhong.DisplayMember = "TenLoaiPhong";
+                    cbxLoaiPhong.ValueMember = "MaLoaiPhong";
+                }
+                else
+                {
+                    MessageBox.Show("Không có dữ liệu trong bảng LoaiPhong!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kết nối: " + ex.Message);
+            }
         }
 
         private void UCQuanLyLoaiPhong_Load(object sender, EventArgs e)
@@ -61,6 +86,11 @@ namespace QuanLyKhachSan.GUI
             dgvLoaiPhong.CurrentCell = null;
             dgvLoaiPhong.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 122, 204);
             dgvLoaiPhong.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+
+            // Load dữ liệu từ BUS
+            LoadData();
+
+            dgvLoaiPhong.DataSource = loaiPhong_BUS.GetAllLoaiPhong();
         }
     }
 }
