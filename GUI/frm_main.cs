@@ -70,6 +70,10 @@ namespace QuanLyKhachSan
             btnQuanLyDatPhong.BackColor = Color.Orange;
             btnQuanLyDichVu.BackColor = Color.Orange;
             btnQuanLyBaoCao.BackColor = Color.Chocolate;
+
+            UCQuanLyBaoCao uc = new UCQuanLyBaoCao();
+            pnlMain.Controls.Clear();
+            pnlMain.Controls.Add(uc);
         }
 
         private void frm_main_Load(object sender, EventArgs e)

@@ -34,8 +34,8 @@
             button1 = new Button();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
-            btnQuanLyBaoCao = new Button();
             btnQuanLyLoaiPhong = new Button();
+            btnQuanLyBaoCao = new Button();
             btnQuanLyDatPhong = new Button();
             btnQuanLyDichVu = new Button();
             btnQuanLyPhong = new Button();
@@ -109,22 +109,6 @@
             panel2.Size = new Size(188, 651);
             panel2.TabIndex = 1;
             // 
-            // btnQuanLyBaoCao
-            // 
-            btnQuanLyBaoCao.BackColor = Color.Orange;
-            btnQuanLyBaoCao.Cursor = Cursors.Hand;
-            btnQuanLyBaoCao.FlatAppearance.BorderSize = 0;
-            btnQuanLyBaoCao.FlatStyle = FlatStyle.Flat;
-            btnQuanLyBaoCao.Image = (Image)resources.GetObject("btnQuanLyBaoCao.Image");
-            btnQuanLyBaoCao.Location = new Point(3, 381);
-            btnQuanLyBaoCao.Name = "btnQuanLyBaoCao";
-            btnQuanLyBaoCao.Size = new Size(182, 72);
-            btnQuanLyBaoCao.TabIndex = 7;
-            btnQuanLyBaoCao.Text = "Quản lý báo cáo";
-            btnQuanLyBaoCao.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnQuanLyBaoCao.UseVisualStyleBackColor = false;
-            btnQuanLyBaoCao.Click += btnQuanLyBaoCao_Click;
-            // 
             // btnQuanLyLoaiPhong
             // 
             btnQuanLyLoaiPhong.BackColor = Color.Orange;
@@ -140,6 +124,22 @@
             btnQuanLyLoaiPhong.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnQuanLyLoaiPhong.UseVisualStyleBackColor = false;
             btnQuanLyLoaiPhong.Click += btnQuanLyLoaiPhong_Click;
+            // 
+            // btnQuanLyBaoCao
+            // 
+            btnQuanLyBaoCao.BackColor = Color.Orange;
+            btnQuanLyBaoCao.Cursor = Cursors.Hand;
+            btnQuanLyBaoCao.FlatAppearance.BorderSize = 0;
+            btnQuanLyBaoCao.FlatStyle = FlatStyle.Flat;
+            btnQuanLyBaoCao.Image = (Image)resources.GetObject("btnQuanLyBaoCao.Image");
+            btnQuanLyBaoCao.Location = new Point(3, 381);
+            btnQuanLyBaoCao.Name = "btnQuanLyBaoCao";
+            btnQuanLyBaoCao.Size = new Size(182, 72);
+            btnQuanLyBaoCao.TabIndex = 7;
+            btnQuanLyBaoCao.Text = "Quản lý báo cáo";
+            btnQuanLyBaoCao.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnQuanLyBaoCao.UseVisualStyleBackColor = false;
+            btnQuanLyBaoCao.Click += btnQuanLyBaoCao_Click;
             // 
             // btnQuanLyDatPhong
             // 
