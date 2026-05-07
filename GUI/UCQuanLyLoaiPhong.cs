@@ -27,6 +27,7 @@ namespace QuanLyKhachSan.GUI
                 if (data != null && data.Count > 0)
                 {
                     dgvLoaiPhong.DataSource = data;
+                    dgvLoaiPhong.Columns["MaLoaiPhong"].Visible = false;
                     cbxLoaiPhong.DataSource = data;
                     cbxLoaiPhong.DisplayMember = "TenLoaiPhong";
                     cbxLoaiPhong.ValueMember = "MaLoaiPhong";
@@ -91,6 +92,14 @@ namespace QuanLyKhachSan.GUI
             LoadData();
 
             dgvLoaiPhong.DataSource = loaiPhong_BUS.GetAllLoaiPhong();
+        }
+
+        private void dgvLoaiPhong_Click(object sender, EventArgs e)
+        {
+            cbxLoaiPhong.SelectedValue = dgvLoaiPhong.CurrentRow.Cells["MaLoaiPhong"].Value;
+            numGia.Value = Convert.ToDecimal(dgvLoaiPhong.CurrentRow.Cells["GiaTheoNgay"].Value);
+            numSoNguoi.Value = Convert.ToDecimal(dgvLoaiPhong.CurrentRow.Cells["SoNguoiToiDa"].Value);
+            rtxtMoTa.Text = dgvLoaiPhong.CurrentRow.Cells["MoTa"].Value.ToString();
         }
     }
 }
