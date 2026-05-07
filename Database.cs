@@ -8,7 +8,6 @@ public class MyDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        // Thay chuỗi kết nối của bạn vào đây
         optionsBuilder.UseSqlServer(@"Server=MSI\SQLEXPRESS01;Database=Quanlikhachsan;Trusted_Connection=True;TrustServerCertificate=True;");
     }
 }

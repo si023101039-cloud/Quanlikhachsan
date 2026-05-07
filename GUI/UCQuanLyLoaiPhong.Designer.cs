@@ -61,7 +61,7 @@
             // rtxtMoTa
             // 
             rtxtMoTa.BorderStyle = BorderStyle.None;
-            rtxtMoTa.Location = new Point(124, 197);
+            rtxtMoTa.Location = new Point(124, 200);
             rtxtMoTa.Name = "rtxtMoTa";
             rtxtMoTa.Size = new Size(195, 64);
             rtxtMoTa.TabIndex = 14;
@@ -146,6 +146,7 @@
             // numGia
             // 
             numGia.Location = new Point(125, 92);
+            numGia.Maximum = new decimal(new int[] { 100000000, 0, 0, 0 });
             numGia.Name = "numGia";
             numGia.Size = new Size(196, 34);
             numGia.TabIndex = 15;
@@ -200,6 +201,7 @@
             dgvLoaiPhong.RowHeadersWidth = 51;
             dgvLoaiPhong.Size = new Size(680, 581);
             dgvLoaiPhong.TabIndex = 8;
+            dgvLoaiPhong.Click += dgvLoaiPhong_Click;
             // 
             // UCQuanLyLoaiPhong
             // 
