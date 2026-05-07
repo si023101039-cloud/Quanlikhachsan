@@ -30,12 +30,12 @@
         {
             label2 = new Label();
             rtxtMoTa = new RichTextBox();
-            cbxLoaiPhong = new ComboBox();
             label7 = new Label();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
             groupBox2 = new GroupBox();
+            txtLoaiPhong = new TextBox();
             numSoNguoi = new NumericUpDown();
             numGia = new NumericUpDown();
             btnXoa = new Button();
@@ -66,15 +66,6 @@
             rtxtMoTa.Size = new Size(195, 64);
             rtxtMoTa.TabIndex = 14;
             rtxtMoTa.Text = "";
-            // 
-            // cbxLoaiPhong
-            // 
-            cbxLoaiPhong.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxLoaiPhong.FormattingEnabled = true;
-            cbxLoaiPhong.Location = new Point(125, 42);
-            cbxLoaiPhong.Name = "cbxLoaiPhong";
-            cbxLoaiPhong.Size = new Size(196, 36);
-            cbxLoaiPhong.TabIndex = 12;
             // 
             // label7
             // 
@@ -118,10 +109,10 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(txtLoaiPhong);
             groupBox2.Controls.Add(numSoNguoi);
             groupBox2.Controls.Add(numGia);
             groupBox2.Controls.Add(rtxtMoTa);
-            groupBox2.Controls.Add(cbxLoaiPhong);
             groupBox2.Controls.Add(label7);
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(label5);
@@ -135,6 +126,13 @@
             groupBox2.TabIndex = 10;
             groupBox2.TabStop = false;
             groupBox2.Text = "Thông tin loại phòng";
+            // 
+            // txtLoaiPhong
+            // 
+            txtLoaiPhong.Location = new Point(125, 43);
+            txtLoaiPhong.Name = "txtLoaiPhong";
+            txtLoaiPhong.Size = new Size(196, 34);
+            txtLoaiPhong.TabIndex = 17;
             // 
             // numSoNguoi
             // 
@@ -164,6 +162,7 @@
             btnXoa.TabIndex = 4;
             btnXoa.Text = "Xóa";
             btnXoa.UseVisualStyleBackColor = false;
+            btnXoa.Click += btnXoa_Click;
             // 
             // btnThem
             // 
@@ -178,6 +177,7 @@
             btnThem.TabIndex = 2;
             btnThem.Text = "Thêm";
             btnThem.UseVisualStyleBackColor = false;
+            btnThem.Click += btnThem_Click;
             // 
             // btnSua
             // 
@@ -192,6 +192,7 @@
             btnSua.TabIndex = 3;
             btnSua.Text = "Sửa";
             btnSua.UseVisualStyleBackColor = false;
+            btnSua.Click += btnSua_Click;
             // 
             // dgvLoaiPhong
             // 
@@ -229,7 +230,6 @@
 
         private Label label2;
         private RichTextBox rtxtMoTa;
-        private ComboBox cbxLoaiPhong;
         private Label label7;
         private Label label6;
         private Label label5;
@@ -241,5 +241,6 @@
         private DataGridView dgvLoaiPhong;
         private NumericUpDown numSoNguoi;
         private NumericUpDown numGia;
+        private TextBox txtLoaiPhong;
     }
 }

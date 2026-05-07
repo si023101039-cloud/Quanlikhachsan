@@ -15,5 +15,17 @@ namespace QuanLyKhachSan.BUS
         {
             return loaiPhong_DAO.GetAllLoaiPhong();
         }
+        public bool InsertLoaiPhong(LoaiPhong_DTO loaiPhong)
+        {
+            return loaiPhong_DAO.InsertLoaiPhong(loaiPhong);
+        }
+        public bool UpdateLoaiPhong(LoaiPhong_DTO loaiPhong)
+        {
+            return loaiPhong_DAO.UpdateLoaiPhong(loaiPhong);
+        }
+        public bool DeleteLoaiPhong(int maLoaiPhong)
+        {
+            return loaiPhong_DAO.DeleteLoaiPhong(maLoaiPhong);
+        }
     }
 }
