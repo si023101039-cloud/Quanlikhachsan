@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QuanLyKhachSan.BUS;
+using QuanLyKhachSan.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,13 +14,24 @@ namespace QuanLyKhachSan.GUI
 {
     public partial class UCQuanLyDatPhong : UserControl
     {
+        PhieuDatPhongBUS bus = new PhieuDatPhongBUS();
         public UCQuanLyDatPhong()
         {
             InitializeComponent();
-        }
 
+        }
+        private void LoadData()
+        {
+            dgvPhieuDatPhong.DataSource = bus.LayDSPhieu();
+        }
         private void UCQuanLyDatPhong_Load(object sender, EventArgs e)
         {
+            LoadData();
+            cbtrangthai.Items.Clear();
+            cbtrangthai.Items.Add("Tất cả");
+            cbtrangthai.Items.Add("Đã xác nhận");
+            cbtrangthai.Items.Add("Chưa xác nhận");
+            cbtrangthai.SelectedIndex = 0;
             dgvPhieuDatPhong.ReadOnly = true;
             dgvPhieuDatPhong.AllowUserToAddRows = false;
             dgvPhieuDatPhong.AllowUserToDeleteRows = false;
@@ -104,6 +117,85 @@ namespace QuanLyKhachSan.GUI
             dgvCTPDP.CurrentCell = null;
             dgvCTPDP.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 122, 204);
             dgvCTPDP.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+        }
+
+        private void button1_Click(object sender, EventArgs e)//dat phong
+        {
+            if (dgvCTPDP.CurrentRow == null)
+            {
+                MessageBox.Show("Vui lòng nhấn Kiểm tra và chọn 1 phòng ở bảng dưới!");
+                return;
+            }
+
+            PhieuDatPhongDTO p = new PhieuDatPhongDTO();
+            p.MaKH = 1;
+            p.MaNV = 1;
+            p.NgayDat = dtpngaydat.Value;
+            p.NgayNhan = dtpngaynhan.Value;
+            p.NgayTra = dtpngaytra.Value;
+            p.GhiChu = txtghichu.Text;
+            p.TrangThaiPhieu = true;
+
+            int maPhong = (int)dgvCTPDP.CurrentRow.Cells["MaPhong"].Value;
+            string tenKhachHang = txtten.Text;
+            decimal gia = 500000;
+
+            string ketQua = bus.ThucHienDatPhong(p, maPhong, tenKhachHang, gia);
+
+            MessageBox.Show(ketQua);
+
+            if (ketQua == "Thành công")
+            {
+                LoadData();
+            }
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnkiemtra_Click(object sender, EventArgs e)
+        {
+            dgvCTPDP.DataSource = bus.LayDSPhongTrong(dtpngaynhan.Value, dtpngaytra.Value);
+        }
+
+        private void dgvPhieuDatPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvPhieuDatPhong_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow r = dgvPhieuDatPhong.Rows[e.RowIndex];
+
+                txtten.Text = r.Cells["MaKH"].Value?.ToString();
+                txtghichu.Text = r.Cells["GhiChu"].Value?.ToString();
+                dtpngaydat.Value = Convert.ToDateTime(r.Cells["NgayDat"].Value);
+                dtpngaynhan.Value = Convert.ToDateTime(r.Cells["NgayNhan"].Value);
+                dtpngaytra.Value = Convert.ToDateTime(r.Cells["NgayTra"].Value);
+
+                int maPhieu = (int)r.Cells["MaPhieuDatPhong"].Value;
+                dgvCTPDP.DataSource = bus.LayDSChiTiet(maPhieu);
+            }
+        }
+
+        private void btnlammoi_Click(object sender, EventArgs e)
+        {
+            txtten.Clear();
+            txtghichu.Clear();
+
+            dtpngaydat.Value = DateTime.Now;
+            dtpngaynhan.Value = DateTime.Now;
+            dtpngaytra.Value = DateTime.Now.AddDays(1);
+
+            txtten.Focus();
+
+            dgvCTPDP.DataSource = null;
+            dgvPhieuDatPhong.CurrentCell = null;
         }
     }
 }

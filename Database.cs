@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using QuanLyKhachSan.DTO;
 
-public class MyDbContext : DbContext
+namespace QuanLyKhachSan
 {
-    public DbSet<LoaiPhong_DTO> LoaiPhong_Entities { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public class MyDbContext : DbContext
     {
-        optionsBuilder.UseSqlServer(@"Server=MSI\SQLEXPRESS01;Database=Quanlikhachsan;Trusted_Connection=True;TrustServerCertificate=True;");
+        public DbSet<LoaiPhong_DTO> LoaiPhong_Entities { get; set; }
+        public virtual DbSet<PhongDTO> Phongs { get; set; }
+        public virtual DbSet<PhieuDatPhongDTO> PhieuDatPhongs { get; set; }
+        public virtual DbSet<ChiTietDatPhongDTO> ChiTietDatPhongs { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=HI\MSSQLSERVER01;Database=Quanlikhachsan;Trusted_Connection=True;TrustServerCertificate=True;");
+        }
     }
 }
