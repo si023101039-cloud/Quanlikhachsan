@@ -8,19 +8,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using QuanLyKhachSan.BUS;
+using QuanLyKhachSan.DAO;
+using QuanLyKhachSan.DTO;
 namespace QuanLyKhachSan.GUI
 {
     public partial class UCQuanLyDatPhong : UserControl
     {
+        int maPhongDuocChon = -1;
+        decimal giaPhongDuocChon = 0;
         PhieuDatPhong_BUS bus = new PhieuDatPhong_BUS();
         public UCQuanLyDatPhong()
         {
             InitializeComponent();
         }
+        private void LoadData()
+        {
+            dgvPhieuDatPhong.DataSource = bus.LayTatCaPhieu();
+        }
+        private void LoadPhong()
+        {
+            PhieuDatPhong_DAO dao = new PhieuDatPhong_DAO();
+            var ds = dao.LayDanhSachPhongTrong();
 
+            cbphong.DataSource = ds;
+            cbphong.DisplayMember = "TenPhong";
+            cbphong.ValueMember = "MaPhong"; 
+
+            cbphong.SelectedIndex = -1;
+        }
+        private void LoadTrangThai()
+        {
+            cbtrangthai.Items.Clear();
+
+            cbtrangthai.Items.Add("Chờ xác nhận"); // 0
+            cbtrangthai.Items.Add("Đã xác nhận");  // 1
+
+            cbtrangthai.SelectedIndex = 0;
+        }
         private void UCQuanLyDatPhong_Load(object sender, EventArgs e)
         {
+            LoadPhong();
+            LoadTrangThai();
+            LoadData();
             dgvPhieuDatPhong.ReadOnly = true;
             dgvPhieuDatPhong.AllowUserToAddRows = false;
             dgvPhieuDatPhong.AllowUserToDeleteRows = false;
@@ -209,6 +239,173 @@ namespace QuanLyKhachSan.GUI
 
                 richghichu.Text =
                     row.Cells["GhiChu"].Value?.ToString();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)//dat phong
+        {
+            try
+            {
+                if (maPhongDuocChon <= 0)
+                {
+                    MessageBox.Show("Chưa chọn phòng");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtten.Text))
+                {
+                    MessageBox.Show("Chưa nhập tên khách hàng");
+                    return;
+                }
+
+                if (txtten.Text.Any(char.IsDigit))
+                {
+                    MessageBox.Show("Tên khách hàng không được chứa số");
+                    return;
+                }
+
+                if (dtpngaydat.Value >= dtpngaynhan.Value)
+                {
+                    MessageBox.Show("Ngày đặt phải nhỏ hơn ngày nhận");
+                    return;
+                }
+
+                if (dtpngaynhan.Value >= dtpngaytra.Value)
+                {
+                    MessageBox.Show("Ngày nhận phải nhỏ hơn ngày trả");
+                    return;
+                }
+
+                bool trangThai = cbtrangthai.Text == "Đã xác nhận";
+
+                PhieuDatPhong_DAO dao = new PhieuDatPhong_DAO();
+
+                bool ketQua = dao.DatPhong(
+                    txtten.Text,
+                    dtpngaydat.Value,
+                    dtpngaynhan.Value,
+                    dtpngaytra.Value,
+                    txtghichu.Text,
+                    maPhongDuocChon,
+                    trangThai
+                );
+
+                if (ketQua)
+                {
+                    MessageBox.Show("Đặt phòng thành công");
+                    LoadData();
+                    LoadPhong();
+                    btnlammoi.PerformClick();
+                }
+                else
+                {
+                    MessageBox.Show("Đặt phòng thất bại");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnkiemtra_Click(object sender, EventArgs e)
+        {
+            PhieuDatPhong_DAO dao = new PhieuDatPhong_DAO();
+            lblkiemtra.Text = " Danh sách phòng hệ thống";
+            dgvCTPDP.DataSource = dao.LayDanhSachPhong();
+        }
+
+        private void dgvPhieuDatPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvPhieuDatPhong_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            DataGridViewRow r = dgvPhieuDatPhong.Rows[e.RowIndex];
+
+            if (r.Cells["TenKH"].Value != null)
+            {
+                txtten.Text = r.Cells["TenKH"].Value.ToString();
+            }
+            else
+            {
+                txtten.Text = "";
+            }
+
+            if (r.Cells["GhiChu"].Value != null)
+            {
+                txtghichu.Text = r.Cells["GhiChu"].Value.ToString();
+            }
+            else
+            {
+                txtghichu.Text = "";
+            }
+
+            if (r.Cells["NgayDat"].Value != null)
+            {
+                dtpngaydat.Value = Convert.ToDateTime(r.Cells["NgayDat"].Value);
+            }
+
+            if (r.Cells["NgayNhan"].Value != null)
+            {
+                dtpngaynhan.Value = Convert.ToDateTime(r.Cells["NgayNhan"].Value);
+            }
+
+            if (r.Cells["NgayTra"].Value != null)
+            {
+                dtpngaytra.Value = Convert.ToDateTime(r.Cells["NgayTra"].Value);
+            }
+
+            if (r.Cells["MaPhieuDatPhong"].Value != null)
+            {
+                int maPhieu = Convert.ToInt32(r.Cells["MaPhieuDatPhong"].Value);
+
+                dgvCTPDP.DataSource = bus.LayChiTietTheoMa(maPhieu);
+            }
+        }
+        private void btnlammoi_Click(object sender, EventArgs e)
+        {
+            txtten.Clear();
+            txtghichu.Clear();
+            lblkiemtra.Text = "Chi tiết phiếu đặt phòng";
+            dtpngaydat.Value = DateTime.Now;
+            dtpngaynhan.Value = DateTime.Now;
+            dtpngaytra.Value = DateTime.Now.AddDays(1);
+
+            txtten.Focus();
+
+            dgvCTPDP.DataSource = null;
+            dgvPhieuDatPhong.CurrentCell = null;
+        }
+
+        private void dgvCTPDP_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvCTPDP_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cbphong_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbphong.SelectedValue != null && int.TryParse(cbphong.SelectedValue.ToString(), out int maPhong))
+            {
+                maPhongDuocChon = maPhong;
             }
         }
     }
