@@ -35,7 +35,7 @@ namespace QuanLyKhachSan.GUI
                 frm_main frm = new frm_main();
                 this.Hide();
                 frm.ShowDialog();
-                this.Close();
+                
             }
             else
             {

@@ -83,5 +83,24 @@ namespace QuanLyKhachSan
             pnlMain.Controls.Add(uc);
             lblpage.Text = "Trang chủ ";
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+            DialogResult result = MessageBox.Show(
+            "Bạn có muốn đăng xuất không?",
+            "Xác nhận",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                frm_dangnhap frm = new frm_dangnhap();
+                frm.Show();
+
+                this.Close();
+            }
+        }
+    
     }
 }
