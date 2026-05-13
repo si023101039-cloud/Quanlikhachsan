@@ -13,23 +13,31 @@ namespace QuanLyKhachSan.DAO
 
         public object LayTatCaPhieu()
         {
-            return (from p in db.PhieuDatPhongs
-                    join k in db.KhachHangs on p.MaKH equals k.MaKH
-                    select new
-                    {
-                        p.MaPhieuDatPhong,
-                        k.TenKH,
-                        p.NgayDat,
-                        p.NgayNhan,
-                        p.NgayTra,
-                        p.TrangThaiPhieu,
-                        p.GhiChu
-                    }).ToList();
+            try
+            {
+                return (from p in db.PhieuDatPhong_Entities
+                        join k in db.KhachHang_Entities on p.MaKH equals k.MaKH
+                        select new
+                        {
+                            p.MaPhieuDatPhong,
+                            k.TenKH,
+                            p.NgayDat,
+                            p.NgayNhan,
+                            p.NgayTra,
+                            p.TrangThaiPhieu,
+                            p.GhiChu
+                        }).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+                return new List<object>();
+            }
         }
 
         public object LayDanhSachPhong()
         {
-            return (from p in db.Phongs
+            return (from p in db.Phong_Entities
                     join lp in db.LoaiPhong_Entities
                     on p.MaLoaiPhong equals lp.MaLoaiPhong
                     select new
@@ -44,7 +52,7 @@ namespace QuanLyKhachSan.DAO
 
         public object LayDanhSachPhongTrong()
         {
-            return (from p in db.Phongs
+            return (from p in db.Phong_Entities
                     join lp in db.LoaiPhong_Entities
                     on p.MaLoaiPhong equals lp.MaLoaiPhong
                     where p.TrangThai == false
@@ -57,8 +65,8 @@ namespace QuanLyKhachSan.DAO
 
         public object LayChiTietTheoMa(int maPhieu)
         {
-            return (from ct in db.ChiTietDatPhongs
-                    join p in db.Phongs
+            return (from ct in db.ChiTietDatPhong_Entities
+                    join p in db.Phong_Entities
                     on ct.MaPhong equals p.MaPhong
                     where ct.MaPhieuDatPhong == maPhieu
                     select new
@@ -77,18 +85,9 @@ namespace QuanLyKhachSan.DAO
         {
             try
             {
-                var phong = db.Phongs.FirstOrDefault(x => x.MaPhong == maPhong);
+                var phong = db.Phong_Entities.FirstOrDefault(x => x.MaPhong == maPhong);
 
-                if (phong == null)
-                    return false;
-
-                if (phong.TrangThai == true)
-                    return false;
-
-                if (string.IsNullOrWhiteSpace(tenKH))
-                    return false;
-
-                if (ngayNhan >= ngayTra)
+                if (phong == null || phong.TrangThai == true || string.IsNullOrWhiteSpace(tenKH) || ngayNhan >= ngayTra)
                     return false;
 
                 KhachHang_DTO khach = new KhachHang_DTO();
@@ -98,30 +97,24 @@ namespace QuanLyKhachSan.DAO
                 khach.GioiTinh = null;
                 khach.CCCD = "KH" + DateTime.Now.Ticks.ToString();
 
-                db.KhachHangs.Add(khach);
-                db.SaveChanges();
+                db.KhachHang_Entities.Add(khach);
+                db.SaveChanges(); 
 
                 decimal gia = 0;
-
-                var loaiPhong = db.LoaiPhong_Entities
-                    .FirstOrDefault(x => x.MaLoaiPhong == phong.MaLoaiPhong);
-
-                if (loaiPhong != null)
-                {
-                    gia = loaiPhong.GiaTheoNgay;
-                }
+                var loaiPhong = db.LoaiPhong_Entities.FirstOrDefault(x => x.MaLoaiPhong == phong.MaLoaiPhong);
+                if (loaiPhong != null) gia = loaiPhong.GiaTheoNgay;
 
                 PhieuDatPhong_DTO phieu = new PhieuDatPhong_DTO();
                 phieu.MaKH = khach.MaKH;
-                phieu.MaNV = 1;
+                phieu.MaNV = 3;
                 phieu.NgayDat = ngayDat;
                 phieu.NgayNhan = ngayNhan;
                 phieu.NgayTra = ngayTra;
                 phieu.TrangThaiPhieu = trangThai;
                 phieu.GhiChu = ghiChu;
 
-                db.PhieuDatPhongs.Add(phieu);
-                db.SaveChanges();
+                db.PhieuDatPhong_Entities.Add(phieu);
+                db.SaveChanges(); 
 
                 ChiTietDatPhong_DTO ct = new ChiTietDatPhong_DTO();
                 ct.MaPhieuDatPhong = phieu.MaPhieuDatPhong;
@@ -130,10 +123,13 @@ namespace QuanLyKhachSan.DAO
                 ct.NgayCheckInThucTe = ngayNhan;
                 ct.NgayCheckOutThucTe = null;
 
-                db.ChiTietDatPhongs.Add(ct);
+                db.ChiTietDatPhong_Entities.Add(ct);
 
-                phong.TrangThai = true;
-            
+                phong.TrangThai = true; 
+
+                db.SaveChanges(); 
+                return true;
+            } 
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi: " + ex.Message);

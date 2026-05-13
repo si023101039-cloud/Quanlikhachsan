@@ -254,14 +254,17 @@ namespace QuanLyKhachSan.GUI
             }
         }
 
-        
+
         private int LayMaPhieuDatPhongTuMaPhong(int maPhong)
         {
             using (var db = new MyDbContext())
             {
                 var chiTiet = db.ChiTietDatPhong_Entities
                                 .FirstOrDefault(ct => ct.MaPhong == maPhong && ct.NgayCheckOutThucTe == null);
-                return chiTiet != null ? chiTiet.MaPhieuDatPhong : 0;
+
+                return (chiTiet != null && chiTiet.MaPhieuDatPhong.HasValue)
+                        ? chiTiet.MaPhieuDatPhong.Value
+                        : 0;
             }
         }
     }

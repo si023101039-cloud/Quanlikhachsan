@@ -216,18 +216,18 @@ namespace QuanLyKhachSan.GUI
                 DataGridViewRow row =
                     dgvPhieuDatPhong.Rows[e.RowIndex];
 
-                txttenKH.Text =
+                txtten.Text =
                     row.Cells["TenKH"].Value.ToString();
 
-                datengaydat.Value =
+                dtpngaydat.Value =
                     Convert.ToDateTime(
                         row.Cells["NgayDat"].Value);
 
-                datengaynhan.Value =
+                dtpngaynhan.Value =
                     Convert.ToDateTime(
                         row.Cells["NgayNhan"].Value);
 
-                datengaytra.Value =
+                dtpngaytra.Value =
                     Convert.ToDateTime(
                         row.Cells["NgayTra"].Value);
 
@@ -237,7 +237,7 @@ namespace QuanLyKhachSan.GUI
                     ? "Đang thuê"
                     : "Đã trả";
 
-                richghichu.Text =
+                txtghichu.Text =
                     row.Cells["GhiChu"].Value?.ToString();
             }
         }
@@ -320,10 +320,10 @@ namespace QuanLyKhachSan.GUI
             dgvCTPDP.DataSource = dao.LayDanhSachPhong();
         }
 
-        private void dgvPhieuDatPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        //private void dgvPhieuDatPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
 
-        }
+        //}
 
         private void dgvPhieuDatPhong_CellClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -12,7 +12,7 @@ namespace QuanLyKhachSan.DTO
     public class Phong_DTO
     {
         [Key]
-        public int MaPhong { get; set; }
+        public int? MaPhong { get; set; }
         public string? TenPhong { get; set; }
         public int? MaLoaiPhong { get; set; }
         public bool? TrangThai { get; set; }
