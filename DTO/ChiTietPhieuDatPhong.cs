@@ -17,6 +17,7 @@ namespace QuanLyKhachSan.DTO
         public int MaPhieuDatPhong { get; set; }
 
         public int MaPhong { get; set; }
+        public decimal DonGia { get; set; }
 
         public DateTime? NgayCheckInThucTe { get; set; }
 
