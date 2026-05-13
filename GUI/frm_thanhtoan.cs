@@ -35,7 +35,7 @@ namespace QuanLyKhachSan.GUI
 
         private void Frm_thanhtoan_Load(object sender, EventArgs e)
         {
-            
+
             btnXuatHoaDon.Visible = false;
 
             var thongTin = bus.LayThongTin(_maPhieu);
@@ -73,9 +73,9 @@ namespace QuanLyKhachSan.GUI
                 MessageBox.Show("Xác nhận thanh toán vào hệ thống thành công!", "Thông báo");
 
                 _idHoaDonVuaLuu = hd.MaHoaDon;
-                btnThanhToan.Enabled = false; 
+                btnThanhToan.Enabled = false;
 
-                
+
                 btnXuatHoaDon.Visible = true;
 
                 _daThanhToanThanhCong = true;
@@ -108,7 +108,7 @@ namespace QuanLyKhachSan.GUI
 
                     ws.Cells["A3"].Value = "Mã hóa đơn:";
 
-                    
+
                     ws.Cells["B3"].Value = _idHoaDonVuaLuu;
                     ws.Cells["B3"].Style.Font.Bold = true;
                     ws.Cells["B3"].Style.Font.Color.SetColor(System.Drawing.Color.Red);
@@ -157,7 +157,7 @@ namespace QuanLyKhachSan.GUI
                     pck.SaveAs(fi);
                 }
 
-                
+
                 Process.Start(new ProcessStartInfo()
                 {
                     FileName = filePath,
@@ -170,6 +170,14 @@ namespace QuanLyKhachSan.GUI
             }
         }
 
-        
+        private void frm_thanhtoan_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnXuatHoaDon_Click_1(object sender, EventArgs e)
+        {
+            OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+        }
     }
 }
