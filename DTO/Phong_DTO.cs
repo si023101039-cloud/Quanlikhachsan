@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace QuanLyKhachSan.DTO
 {
     [Table("Phong")]
-    public class PhongDTO
+    public class Phong_DTO
     {
         [Key]
         public int MaPhong { get; set; }

@@ -6,10 +6,11 @@ namespace QuanLyKhachSan
 {
     public class MyDbContext : DbContext
     {
+        public DbSet<KhachHang_DTO> KhachHangs { get; set; }
+        public DbSet<Phong_DTO> Phongs { get; set; }
         public DbSet<LoaiPhong_DTO> LoaiPhong_Entities { get; set; }
-        public virtual DbSet<PhongDTO> Phongs { get; set; }
-        public virtual DbSet<PhieuDatPhongDTO> PhieuDatPhongs { get; set; }
-        public virtual DbSet<ChiTietDatPhongDTO> ChiTietDatPhongs { get; set; }
+        public DbSet<PhieuDatPhong_DTO> PhieuDatPhongs { get; set; }
+        public DbSet<ChiTietDatPhong_DTO> ChiTietDatPhongs { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=HI\MSSQLSERVER01;Database=Quanlikhachsan;Trusted_Connection=True;TrustServerCertificate=True;");
