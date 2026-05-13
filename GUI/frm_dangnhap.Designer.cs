@@ -35,12 +35,12 @@
             pictureBox4 = new PictureBox();
             panel2 = new Panel();
             label2 = new Label();
-            textBox2 = new TextBox();
+            txtMatKhau = new TextBox();
             pictureBox3 = new PictureBox();
             panel3 = new Panel();
             pictureBox2 = new PictureBox();
             label1 = new Label();
-            textBox1 = new TextBox();
+            txtTaiKhoan = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -79,12 +79,12 @@
             panel1.Controls.Add(pictureBox4);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(textBox2);
+            panel1.Controls.Add(txtMatKhau);
             panel1.Controls.Add(pictureBox3);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(txtTaiKhoan);
             panel1.Location = new Point(6, 6);
             panel1.Name = "panel1";
             panel1.Size = new Size(293, 299);
@@ -117,14 +117,15 @@
             label2.TabIndex = 21;
             label2.Text = "Mật khẩu:";
             // 
-            // textBox2
+            // txtMatKhau
             // 
-            textBox2.BackColor = Color.WhiteSmoke;
-            textBox2.BorderStyle = BorderStyle.None;
-            textBox2.Location = new Point(57, 234);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(208, 27);
-            textBox2.TabIndex = 20;
+            txtMatKhau.BackColor = Color.WhiteSmoke;
+            txtMatKhau.BorderStyle = BorderStyle.None;
+            txtMatKhau.Location = new Point(57, 234);
+            txtMatKhau.Name = "txtMatKhau";
+            txtMatKhau.PasswordChar = '*';
+            txtMatKhau.Size = new Size(208, 27);
+            txtMatKhau.TabIndex = 20;
             // 
             // pictureBox3
             // 
@@ -163,14 +164,14 @@
             label1.TabIndex = 16;
             label1.Text = "Tên đăng nhập:";
             // 
-            // textBox1
+            // txtTaiKhoan
             // 
-            textBox1.BackColor = Color.WhiteSmoke;
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(54, 153);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(208, 27);
-            textBox1.TabIndex = 15;
+            txtTaiKhoan.BackColor = Color.WhiteSmoke;
+            txtTaiKhoan.BorderStyle = BorderStyle.None;
+            txtTaiKhoan.Location = new Point(54, 153);
+            txtTaiKhoan.Name = "txtTaiKhoan";
+            txtTaiKhoan.Size = new Size(208, 27);
+            txtTaiKhoan.TabIndex = 15;
             // 
             // frm_dangnhap
             // 
@@ -204,11 +205,11 @@
         private PictureBox pictureBox4;
         private Panel panel2;
         private Label label2;
-        private TextBox textBox2;
+        private TextBox txtMatKhau;
         private PictureBox pictureBox3;
         private Panel panel3;
         private PictureBox pictureBox2;
         private Label label1;
-        private TextBox textBox1;
+        private TextBox txtTaiKhoan;
     }
 }
