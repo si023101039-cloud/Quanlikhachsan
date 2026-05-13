@@ -105,6 +105,7 @@ namespace QuanLyKhachSan.GUI
             LoadLoaiPhong();
             LoadData();
             loadtrangthai();
+            phong_BUS.CapNhatTenPhong();
 
         }
 
@@ -124,18 +125,18 @@ namespace QuanLyKhachSan.GUI
 
             int soLonNhat = 0;
 
-            // tìm số phòng lớn nhất của tầng đang chọn
+        
             for (int i = 0; i < dgvPhong.Rows.Count; i++)
             {
                 string tenPhong = dgvPhong.Rows[i].Cells["TenPhong"].Value.ToString();
 
-                // kiểm tra đúng tầng
+                
                 if (tenPhong.StartsWith("P" + tang))
                 {
-                    // lấy 2 số cuối
+                  
                     int so = Convert.ToInt32(tenPhong.Substring(2));
 
-                    // tìm số lớn nhất
+                    
                     if (so > soLonNhat)
                     {
                         soLonNhat = so;
@@ -143,7 +144,7 @@ namespace QuanLyKhachSan.GUI
                 }
             }
 
-            // tạo tên phòng mới
+            
             string tenPhongMoi = "P" + tang + (soLonNhat + 1).ToString("00");
 
             txtTenPhong.Text = tenPhongMoi;
