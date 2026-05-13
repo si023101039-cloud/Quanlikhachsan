@@ -52,7 +52,7 @@
             // 
             // bcdttheothang
             // 
-            bcdttheothang.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bcdttheothang.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             bcdttheothang.Location = new Point(420, 241);
             bcdttheothang.Name = "bcdttheothang";
             bcdttheothang.Size = new Size(188, 172);
@@ -111,6 +111,12 @@
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(txtNam);
+            Controls.Add(cbxThang);
+            Controls.Add(bcdttheothang);
+            Controls.Add(bsdt);
             Controls.Add(btnbaocaohieusuat);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -125,8 +131,16 @@
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private Button btnbaocaohieusuat;
+        // KHAI BÁO BIẾN - Quan trọng nhất để hết lỗi 'does not exist'
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnbaocaohieusuat;
+        private System.Windows.Forms.Button bsdt;
+        private System.Windows.Forms.Button bcdttheothang;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox cbxThang;
+        private System.Windows.Forms.TextBox txtNam;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

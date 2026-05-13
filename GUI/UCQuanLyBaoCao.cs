@@ -79,7 +79,7 @@ namespace QuanLyKhachSan.GUI
             try
             {
                 int thang = int.Parse(cbxThang.Text);
-                int nam = (int)txtNam.Value;
+                int nam = int.Parse(txtNam.Text);
 
                 var dataHieuSuat = _baoCaoBus.ThongKeHieuSuat(thang, nam);
 
@@ -95,6 +95,8 @@ namespace QuanLyKhachSan.GUI
             catch (Exception ex)
             {
                 MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
+            }
+        }
 
 
         public void XuatBaoCaoDoanhThuExcel(BaoCaoExcelView data)

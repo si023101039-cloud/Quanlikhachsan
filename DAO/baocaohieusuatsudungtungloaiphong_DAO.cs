@@ -1,41 +1,47 @@
-﻿using System;
+﻿using QuanLyKhachSan.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using QuanLyKhachSan.DTO;
 
 namespace QuanLyKhachSan.DAO
 {
     public class baocaohieusuatsudungtungloaiphong_DAO
     {
         private MyDbContext db = new MyDbContext();
+
         public List<baocaohieusuatsudungtungloaiphong_DTO> LayHieuSuatLoaiPhong(int thang, int nam)
         {
             int soNgayTrongThang = DateTime.DaysInMonth(nam, thang);
 
-            var danhSachLoaiPhong = db.LoaiPhong_Entities.ToList();
+            var rawData = (from lp in db.LoaiPhong_Entities
+                           select new
+                           {
+                               lp.TenLoaiPhong,
+                               lp.MaLoaiPhong,
+                               TongSoPhong = db.Phong_Entities.Count(p => p.MaLoaiPhong == lp.MaLoaiPhong),
+                               ChiTietThue = db.ChiTietDatPhong_Entities
+                                   .Join(db.Phong_Entities,
+                                         ctdp => ctdp.MaPhong,
+                                         p => p.MaPhong,
+                                         (ctdp, p) => new { ctdp, p })
+                                   .Where(x => x.p.MaLoaiPhong == lp.MaLoaiPhong
+                                          && x.ctdp.NgayCheckOutThucTe != null
+                                          && x.ctdp.NgayCheckInThucTe.Value.Month == thang
+                                          && x.ctdp.NgayCheckInThucTe.Value.Year == nam)
+                                   .Select(x => x.ctdp)
+                                   .ToList() 
+                           }).ToList();
 
-            var query = from lp in db.LoaiPhong_Entities
-                        let phongThuocLoai = db.Phong_Entities.Where(p => p.MaLoaiPhong == lp.MaLoaiPhong)
-                        let chiTietThue = (from ctdp in db.ChiTietDatPhong_Entities
-                                           join p in db.Phong_Entities on ctdp.MaPhong equals p.MaPhong
-                                           where p.MaLoaiPhong == lp.MaLoaiPhong
-                                              && ctdp.NgayCheckOutThucTe != null
-                                              && ctdp.NgayCheckInThucTe.Value.Month == thang
-                                              && ctdp.NgayCheckInThucTe.Value.Year == nam
-                                           select ctdp)
-                        select new baocaohieusuatsudungtungloaiphong_DTO
-                        {
-                            TenLoaiPhong = lp.TenLoaiPhong,
-                            TongSoPhong = phongThuocLoai.Count(),
-                            SoNgayThueThucTe = chiTietThue.Count(),
-                            TongSoNgayKhaDung = phongThuocLoai.Count() * soNgayTrongThang,
-                            DoanhThuLoaiPhong = chiTietThue.Sum(x => (decimal?)x.DonGia) ?? 0
-                        };
+            var result = rawData.Select(x => new baocaohieusuatsudungtungloaiphong_DTO
+            {
+                TenLoaiPhong = x.TenLoaiPhong,
+                TongSoPhong = x.TongSoPhong,
+                SoNgayThueThucTe = x.ChiTietThue.Count, 
+                TongSoNgayKhaDung = x.TongSoPhong * soNgayTrongThang,
+                DoanhThuLoaiPhong = x.ChiTietThue.Sum(ct => (decimal?)ct.DonGia) ?? 0
+            }).ToList();
 
-            return query.ToList();
+            return result;
         }
     }
 }
