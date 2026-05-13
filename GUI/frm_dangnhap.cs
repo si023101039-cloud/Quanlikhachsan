@@ -25,14 +25,24 @@ namespace QuanLyKhachSan.GUI
         {
             string user = txtTaiKhoan.Text.Trim();
             string pass = txtMatKhau.Text.Trim();
+
             TaiKhoan_BUS bus = new TaiKhoan_BUS();
             TaiKhoan_DTO? userLogin = bus.Login(user, pass);
 
             if (userLogin != null)
             {
-                MessageBox.Show($"Chào mừng {userLogin.NhanVien?.HoTen} đã đăng nhập!", "Thành công");
+                Session session = new Session
+                {
+                    MaNV = userLogin.MaNV ?? 0,
+                    TenDangNhap = userLogin.TenDangNhap,
+                    VaiTro = userLogin.VaiTro,
+                    HoTen = userLogin.NhanVien?.HoTen ?? "Người dùng"
+                };
 
-                frm_main frm = new frm_main();
+                MessageBox.Show($"Chào mừng {session.HoTen} đã đăng nhập!", "Thành công");
+
+                frm_main frm = new frm_main(session);
+
                 this.Hide();
                 frm.ShowDialog();
 

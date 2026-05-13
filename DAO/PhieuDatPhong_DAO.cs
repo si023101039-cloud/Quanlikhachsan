@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using QuanLyKhachSan.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using QuanLyKhachSan.DTO;
 
 namespace QuanLyKhachSan.DAO
 {
@@ -91,6 +92,25 @@ namespace QuanLyKhachSan.DAO
                 MessageBox.Show("Lỗi: " + ex.Message);
                 return false;
             }
+        }
+        // xem lịch sử đặt phòng
+        public List<LichSuDatPhong_DTO> LayTatCaLichSu()
+        {
+            var result = from nv in db.NhanVien_Entities
+                         from pdp in db.PhieuDatPhong_Entities
+                         from kh in db.KhachHang_Entities
+                         where nv.MaNV == pdp.MaNV && pdp.MaKH == kh.MaKH
+                         select new LichSuDatPhong_DTO
+                         {
+                             MaPhieuDatPhong = pdp.MaPhieuDatPhong,
+                             TenNV = nv.HoTen,
+                             TenKhachHang = kh.TenKH,
+                             NgayDat = pdp.NgayDat,
+                             NgayCheckIn = pdp.NgayNhan,
+                             NgayCheckOut = pdp.NgayTra,
+                         };
+
+            return result.ToList();
         }
     }
 }

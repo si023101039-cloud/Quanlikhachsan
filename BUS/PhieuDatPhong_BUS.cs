@@ -27,5 +27,9 @@ namespace QuanLyKhachSan.BUS
         {
             return phieuDatPhong_DAO.CapNhatTrangThaiPhong();
         }
+        public List<LichSuDatPhong_DTO> LayTatCaLichSu()
+        {
+            return phieuDatPhong_DAO.LayTatCaLichSu();
+        }
     }
 }

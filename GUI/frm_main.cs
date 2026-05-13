@@ -4,9 +4,11 @@ namespace QuanLyKhachSan
 {
     public partial class frm_main : Form
     {
-        public frm_main()
+        private Session _session;
+        public frm_main(Session session)
         {
             InitializeComponent();
+            _session = session;
         }
         public void btnQuanLyDichVu_Click(object sender, EventArgs e)
         {
@@ -82,6 +84,19 @@ namespace QuanLyKhachSan
             pnlMain.Controls.Clear();
             pnlMain.Controls.Add(uc);
             lblpage.Text = "Trang chủ ";
+
+            if (_session.VaiTro == "nhanvien")
+            {
+                btnXemLSDP.Visible = false;
+            }
+        }
+
+        private void btnXemLSDP_Click(object sender, EventArgs e)
+        {
+            UCXemlichsudatphong uc = new UCXemlichsudatphong();
+            pnlMain.Controls.Clear();
+            pnlMain.Controls.Add(uc);
+            lblpage.Text = "Trang chủ > " + "Xem Lịch Sử Đặt Phòng";
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)

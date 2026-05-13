@@ -42,6 +42,7 @@
             panel3 = new Panel();
             lblpage = new Label();
             pnlMain = new Panel();
+            btnXemLSDP = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -100,6 +101,7 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(btnXemLSDP);
             panel2.Controls.Add(btnQuanLyLoaiPhong);
             panel2.Controls.Add(btnQuanLyBaoCao);
             panel2.Controls.Add(btnQuanLyDatPhong);
@@ -216,6 +218,22 @@
             pnlMain.Size = new Size(1034, 651);
             pnlMain.TabIndex = 3;
             // 
+            // btnXemLSDP
+            // 
+            btnXemLSDP.BackColor = Color.Orange;
+            btnXemLSDP.Cursor = Cursors.Hand;
+            btnXemLSDP.FlatAppearance.BorderSize = 0;
+            btnXemLSDP.FlatStyle = FlatStyle.Flat;
+            btnXemLSDP.Image = (Image)resources.GetObject("btnXemLSDP.Image");
+            btnXemLSDP.Location = new Point(3, 471);
+            btnXemLSDP.Name = "btnXemLSDP";
+            btnXemLSDP.Size = new Size(182, 72);
+            btnXemLSDP.TabIndex = 8;
+            btnXemLSDP.Text = "Xem lịch sử đặt phòng";
+            btnXemLSDP.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnXemLSDP.UseVisualStyleBackColor = false;
+            btnXemLSDP.Click += btnXemLSDP_Click;
+            // 
             // frm_main
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
@@ -257,5 +275,6 @@
         private Button btnQuanLyDichVu;
         private Button btnQuanLyPhong;
         private Label lblpage;
+        private Button btnXemLSDP;
     }
 }
