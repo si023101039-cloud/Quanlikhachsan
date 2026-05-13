@@ -228,7 +228,7 @@ namespace QuanLyKhachSan.GUI
                         rtxtMoTa.Enabled = false;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi: " + ex.Message);
                 }
@@ -259,6 +259,11 @@ namespace QuanLyKhachSan.GUI
                     MessageBox.Show("Xóa loại phòng thất bại!");
                 }
             }
+        }
+
+        private void dgvLoaiPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

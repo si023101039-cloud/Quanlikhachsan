@@ -9,66 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Data.designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Data.dbml</DependentUpon>
-    </Compile>
-    <Compile Update="DataClasses1.designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Data.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Data.designer.cs</LastGenOutput>
-    </None>
-    <None Update="DataClasses1.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
-    </None>
-    <None Update="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+    <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <Service Include="{3259aa49-8aa1-44d3-9025-a0b520596a8c}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="EPPlus" Version="7.5.3" />
-    <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.15">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.7">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
   </ItemGroup>
 
 </Project>

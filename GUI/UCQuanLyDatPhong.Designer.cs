@@ -31,17 +31,20 @@
             dgvPhieuDatPhong = new DataGridView();
             dgvCTPDP = new DataGridView();
             groupBox1 = new GroupBox();
+            label9 = new Label();
+            cbphong = new ComboBox();
+            btnlammoi = new Button();
             panel1 = new Panel();
-            button4 = new Button();
-            richghichu = new RichTextBox();
-            btcapnhat = new Button();
+            btnkiemtra = new Button();
+            txtghichu = new RichTextBox();
+            button3 = new Button();
             cbtrangthai = new ComboBox();
-            bttraphong = new Button();
-            datengaynhan = new DateTimePicker();
-            button1 = new Button();
-            datengaytra = new DateTimePicker();
-            datengaydat = new DateTimePicker();
-            txttenKH = new TextBox();
+            button2 = new Button();
+            dtpngaynhan = new DateTimePicker();
+            btndatphong = new Button();
+            dtpngaytra = new DateTimePicker();
+            dtpngaydat = new DateTimePicker();
+            txtten = new TextBox();
             label8 = new Label();
             label7 = new Label();
             label6 = new Label();
@@ -49,7 +52,7 @@
             label4 = new Label();
             label3 = new Label();
             label1 = new Label();
-            label2 = new Label();
+            lblkiemtra = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvPhieuDatPhong).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCTPDP).BeginInit();
             groupBox1.SuspendLayout();
@@ -63,6 +66,7 @@
             dgvPhieuDatPhong.RowHeadersWidth = 51;
             dgvPhieuDatPhong.Size = new Size(680, 287);
             dgvPhieuDatPhong.TabIndex = 0;
+            dgvPhieuDatPhong.CellClick += dgvPhieuDatPhong_CellClick;
             dgvPhieuDatPhong.CellContentClick += dgvPhieuDatPhong_CellContentClick;
             // 
             // dgvCTPDP
@@ -73,20 +77,25 @@
             dgvCTPDP.RowHeadersWidth = 51;
             dgvCTPDP.Size = new Size(680, 178);
             dgvCTPDP.TabIndex = 1;
+            dgvCTPDP.CellClick += dgvCTPDP_CellClick;
+            dgvCTPDP.CellContentClick += dgvCTPDP_CellContentClick;
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label9);
+            groupBox1.Controls.Add(cbphong);
+            groupBox1.Controls.Add(btnlammoi);
             groupBox1.Controls.Add(panel1);
-            groupBox1.Controls.Add(button4);
-            groupBox1.Controls.Add(richghichu);
-            groupBox1.Controls.Add(btcapnhat);
+            groupBox1.Controls.Add(btnkiemtra);
+            groupBox1.Controls.Add(txtghichu);
+            groupBox1.Controls.Add(button3);
             groupBox1.Controls.Add(cbtrangthai);
-            groupBox1.Controls.Add(bttraphong);
-            groupBox1.Controls.Add(datengaynhan);
-            groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(datengaytra);
-            groupBox1.Controls.Add(datengaydat);
-            groupBox1.Controls.Add(txttenKH);
+            groupBox1.Controls.Add(button2);
+            groupBox1.Controls.Add(dtpngaynhan);
+            groupBox1.Controls.Add(btndatphong);
+            groupBox1.Controls.Add(dtpngaytra);
+            groupBox1.Controls.Add(dtpngaydat);
+            groupBox1.Controls.Add(txtten);
             groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(label6);
@@ -101,6 +110,41 @@
             groupBox1.Text = "Thông tin phiếu đặt phòng:";
             groupBox1.Enter += groupBox1_Enter;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label9.Location = new Point(6, 240);
+            label9.Name = "label9";
+            label9.Size = new Size(77, 28);
+            label9.TabIndex = 21;
+            label9.Text = "Phòng:";
+            // 
+            // cbphong
+            // 
+            cbphong.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbphong.FormattingEnabled = true;
+            cbphong.Location = new Point(155, 240);
+            cbphong.Name = "cbphong";
+            cbphong.Size = new Size(177, 36);
+            cbphong.TabIndex = 20;
+            cbphong.SelectedIndexChanged += cbphong_SelectedIndexChanged;
+            // 
+            // btnlammoi
+            // 
+            btnlammoi.BackColor = Color.CornflowerBlue;
+            btnlammoi.Cursor = Cursors.Hand;
+            btnlammoi.FlatAppearance.BorderSize = 0;
+            btnlammoi.FlatStyle = FlatStyle.Flat;
+            btnlammoi.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnlammoi.Location = new Point(97, 359);
+            btnlammoi.Name = "btnlammoi";
+            btnlammoi.Size = new Size(152, 48);
+            btnlammoi.TabIndex = 19;
+            btnlammoi.Text = "Làm mới";
+            btnlammoi.UseVisualStyleBackColor = false;
+            btnlammoi.Click += btnlammoi_Click;
+            // 
             // panel1
             // 
             panel1.BackColor = Color.Orange;
@@ -109,43 +153,44 @@
             panel1.Size = new Size(174, 2);
             panel1.TabIndex = 18;
             // 
-            // button4
+            // btnkiemtra
             // 
-            button4.BackColor = Color.CornflowerBlue;
-            button4.Cursor = Cursors.Hand;
-            button4.FlatAppearance.BorderSize = 0;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button4.Location = new Point(33, 482);
-            button4.Name = "button4";
-            button4.Size = new Size(273, 48);
-            button4.TabIndex = 9;
-            button4.Text = "Kiểm tra tình trạng phòng";
-            button4.UseVisualStyleBackColor = false;
+            btnkiemtra.BackColor = Color.CornflowerBlue;
+            btnkiemtra.Cursor = Cursors.Hand;
+            btnkiemtra.FlatAppearance.BorderSize = 0;
+            btnkiemtra.FlatStyle = FlatStyle.Flat;
+            btnkiemtra.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnkiemtra.Location = new Point(33, 482);
+            btnkiemtra.Name = "btnkiemtra";
+            btnkiemtra.Size = new Size(273, 48);
+            btnkiemtra.TabIndex = 9;
+            btnkiemtra.Text = "Kiểm tra tình trạng phòng";
+            btnkiemtra.UseVisualStyleBackColor = false;
+            btnkiemtra.Click += btnkiemtra_Click;
             // 
-            // richghichu
+            // txtghichu
             // 
-            richghichu.BorderStyle = BorderStyle.None;
-            richghichu.Location = new Point(155, 240);
-            richghichu.Name = "richghichu";
-            richghichu.Size = new Size(177, 72);
-            richghichu.TabIndex = 17;
-            richghichu.Text = "";
+            txtghichu.BorderStyle = BorderStyle.None;
+            txtghichu.Location = new Point(155, 282);
+            txtghichu.Name = "txtghichu";
+            txtghichu.Size = new Size(177, 37);
+            txtghichu.TabIndex = 17;
+            txtghichu.Text = "";
             // 
-            // btcapnhat
+            // button3
             // 
-            btcapnhat.BackColor = Color.CornflowerBlue;
-            btcapnhat.Cursor = Cursors.Hand;
-            btcapnhat.FlatAppearance.BorderSize = 0;
-            btcapnhat.FlatStyle = FlatStyle.Flat;
-            btcapnhat.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btcapnhat.Location = new Point(33, 331);
-            btcapnhat.Name = "btcapnhat";
-            btcapnhat.Size = new Size(273, 48);
-            btcapnhat.TabIndex = 8;
-            btcapnhat.Text = "Cập nhật trạng thái phòng";
-            btcapnhat.UseVisualStyleBackColor = false;
-            btcapnhat.Click += btcapnhat_Click;
+            button3.BackColor = Color.CornflowerBlue;
+            button3.Cursor = Cursors.Hand;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button3.Location = new Point(33, 551);
+            button3.Name = "button3";
+            button3.Size = new Size(273, 48);
+            button3.TabIndex = 8;
+            button3.Text = "Cập nhật trạng thái phòng";
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
             // cbtrangthai
             // 
@@ -156,79 +201,80 @@
             cbtrangthai.Size = new Size(177, 36);
             cbtrangthai.TabIndex = 16;
             // 
-            // bttraphong
+            // button2
             // 
-            bttraphong.BackColor = Color.Red;
-            bttraphong.Cursor = Cursors.Hand;
-            bttraphong.FlatAppearance.BorderSize = 0;
-            bttraphong.FlatStyle = FlatStyle.Flat;
-            bttraphong.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            bttraphong.Location = new Point(171, 413);
-            bttraphong.Name = "bttraphong";
-            bttraphong.Size = new Size(152, 48);
-            bttraphong.TabIndex = 7;
-            bttraphong.Text = "Trả phòng";
-            bttraphong.UseVisualStyleBackColor = false;
-            bttraphong.Click += bttraphong_Click;
+            button2.BackColor = Color.Red;
+            button2.Cursor = Cursors.Hand;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button2.Location = new Point(171, 413);
+            button2.Name = "button2";
+            button2.Size = new Size(152, 48);
+            button2.TabIndex = 7;
+            button2.Text = "Trả phòng";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
-            // datengaynhan
+            // dtpngaynhan
             // 
-            datengaynhan.CalendarForeColor = Color.WhiteSmoke;
-            datengaynhan.CalendarMonthBackground = Color.WhiteSmoke;
-            datengaynhan.Format = DateTimePickerFormat.Short;
-            datengaynhan.Location = new Point(155, 117);
-            datengaynhan.Name = "datengaynhan";
-            datengaynhan.Size = new Size(177, 34);
-            datengaynhan.TabIndex = 15;
+            dtpngaynhan.CalendarForeColor = Color.WhiteSmoke;
+            dtpngaynhan.CalendarMonthBackground = Color.WhiteSmoke;
+            dtpngaynhan.Format = DateTimePickerFormat.Short;
+            dtpngaynhan.Location = new Point(155, 117);
+            dtpngaynhan.Name = "dtpngaynhan";
+            dtpngaynhan.Size = new Size(177, 34);
+            dtpngaynhan.TabIndex = 15;
             // 
-            // button1
+            // btndatphong
             // 
-            button1.BackColor = Color.CornflowerBlue;
-            button1.Cursor = Cursors.Hand;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.Location = new Point(13, 413);
-            button1.Name = "button1";
-            button1.Size = new Size(152, 48);
-            button1.TabIndex = 6;
-            button1.Text = "Đặt phòng";
-            button1.UseVisualStyleBackColor = false;
+            btndatphong.BackColor = Color.CornflowerBlue;
+            btndatphong.Cursor = Cursors.Hand;
+            btndatphong.FlatAppearance.BorderSize = 0;
+            btndatphong.FlatStyle = FlatStyle.Flat;
+            btndatphong.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btndatphong.Location = new Point(13, 413);
+            btndatphong.Name = "btndatphong";
+            btndatphong.Size = new Size(152, 48);
+            btndatphong.TabIndex = 6;
+            btndatphong.Text = "Đặt phòng";
+            btndatphong.UseVisualStyleBackColor = false;
+            btndatphong.Click += button1_Click;
             // 
-            // datengaytra
+            // dtpngaytra
             // 
-            datengaytra.CalendarForeColor = Color.WhiteSmoke;
-            datengaytra.CalendarMonthBackground = Color.WhiteSmoke;
-            datengaytra.Format = DateTimePickerFormat.Short;
-            datengaytra.Location = new Point(155, 157);
-            datengaytra.Name = "datengaytra";
-            datengaytra.Size = new Size(177, 34);
-            datengaytra.TabIndex = 14;
+            dtpngaytra.CalendarForeColor = Color.WhiteSmoke;
+            dtpngaytra.CalendarMonthBackground = Color.WhiteSmoke;
+            dtpngaytra.Format = DateTimePickerFormat.Short;
+            dtpngaytra.Location = new Point(155, 157);
+            dtpngaytra.Name = "dtpngaytra";
+            dtpngaytra.Size = new Size(177, 34);
+            dtpngaytra.TabIndex = 14;
             // 
-            // datengaydat
+            // dtpngaydat
             // 
-            datengaydat.CalendarForeColor = Color.WhiteSmoke;
-            datengaydat.CalendarMonthBackground = Color.WhiteSmoke;
-            datengaydat.Format = DateTimePickerFormat.Short;
-            datengaydat.Location = new Point(155, 78);
-            datengaydat.Name = "datengaydat";
-            datengaydat.Size = new Size(177, 34);
-            datengaydat.TabIndex = 13;
+            dtpngaydat.CalendarForeColor = Color.WhiteSmoke;
+            dtpngaydat.CalendarMonthBackground = Color.WhiteSmoke;
+            dtpngaydat.Format = DateTimePickerFormat.Short;
+            dtpngaydat.Location = new Point(155, 78);
+            dtpngaydat.Name = "dtpngaydat";
+            dtpngaydat.Size = new Size(177, 34);
+            dtpngaydat.TabIndex = 13;
             // 
-            // txttenKH
+            // txtten
             // 
-            txttenKH.BackColor = Color.WhiteSmoke;
-            txttenKH.BorderStyle = BorderStyle.None;
-            txttenKH.Location = new Point(155, 38);
-            txttenKH.Name = "txttenKH";
-            txttenKH.Size = new Size(177, 27);
-            txttenKH.TabIndex = 12;
+            txtten.BackColor = Color.WhiteSmoke;
+            txtten.BorderStyle = BorderStyle.FixedSingle;
+            txtten.Location = new Point(155, 38);
+            txtten.Name = "txtten";
+            txtten.Size = new Size(177, 34);
+            txtten.TabIndex = 12;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label8.Location = new Point(0, 235);
+            label8.Location = new Point(6, 291);
             label8.Name = "label8";
             label8.Size = new Size(87, 28);
             label8.TabIndex = 11;
@@ -288,28 +334,28 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(769, 12);
+            label1.Location = new Point(665, 12);
             label1.Name = "label1";
             label1.Size = new Size(265, 28);
             label1.TabIndex = 4;
             label1.Text = "Danh sách phiếu đặt phòng";
             // 
-            // label2
+            // lblkiemtra
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label2.Location = new Point(799, 348);
-            label2.Name = "label2";
-            label2.Size = new Size(236, 28);
-            label2.TabIndex = 5;
-            label2.Text = "Chi tiết phiếu đặt phòng";
+            lblkiemtra.AutoSize = true;
+            lblkiemtra.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            lblkiemtra.Location = new Point(680, 348);
+            lblkiemtra.Name = "lblkiemtra";
+            lblkiemtra.Size = new Size(236, 28);
+            lblkiemtra.TabIndex = 5;
+            lblkiemtra.Text = "Chi tiết phiếu đặt phòng";
             // 
             // UCQuanLyDatPhong
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            Controls.Add(label2);
+            Controls.Add(lblkiemtra);
             Controls.Add(label1);
             Controls.Add(groupBox1);
             Controls.Add(dgvCTPDP);
@@ -333,23 +379,26 @@
         private DataGridView dgvCTPDP;
         private GroupBox groupBox1;
         private Label label1;
-        private Label label2;
-        private TextBox txttenKH;
+        private Label lblkiemtra;
+        private TextBox txtten;
         private Label label8;
         private Label label7;
         private Label label6;
         private Label label5;
         private Label label4;
         private Label label3;
-        private RichTextBox richghichu;
+        private RichTextBox txtghichu;
         private ComboBox cbtrangthai;
-        private DateTimePicker datengaynhan;
-        private DateTimePicker datengaytra;
-        private DateTimePicker datengaydat;
-        private Button button1;
-        private Button button4;
-        private Button btcapnhat;
-        private Button bttraphong;
+        private DateTimePicker dtpngaynhan;
+        private DateTimePicker dtpngaytra;
+        private DateTimePicker dtpngaydat;
+        private Button btndatphong;
+        private Button btnkiemtra;
+        private Button button3;
+        private Button button2;
         private Panel panel1;
+        private Button btnlammoi;
+        private Label label9;
+        private ComboBox cbphong;
     }
 }

@@ -1,4 +1,5 @@
-﻿using QuanLyKhachSan.DAO;
+using QuanLyKhachSan.DAO;
+using System;
 using QuanLyKhachSan.DTO;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,17 @@ namespace QuanLyKhachSan.BUS
 {
     public class PhieuDatPhong_BUS
     {
-        private PhieuDatPhong_DAO phieuDatPhong_DAO
-            = new PhieuDatPhong_DAO();
+        PhieuDatPhong_DAO phieuDatPhong_DAO = new PhieuDatPhong_DAO();
+
+        public object LayTatCaPhieu()
+        {
+            return phieuDatPhong_DAO.LayTatCaPhieu();
+        }
+
+        public object LayChiTietTheoMa(int ma)
+        {
+            return phieuDatPhong_DAO.LayChiTietTheoMa(ma);
+        }
 
         public List<PhieuDatPhong_View> GetAllPhieuDatPhong()
         {

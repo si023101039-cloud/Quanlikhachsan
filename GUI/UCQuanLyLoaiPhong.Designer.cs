@@ -202,6 +202,7 @@
             dgvLoaiPhong.RowHeadersWidth = 51;
             dgvLoaiPhong.Size = new Size(680, 581);
             dgvLoaiPhong.TabIndex = 8;
+            dgvLoaiPhong.CellContentClick += dgvLoaiPhong_CellContentClick;
             dgvLoaiPhong.Click += dgvLoaiPhong_Click;
             // 
             // UCQuanLyLoaiPhong
