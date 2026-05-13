@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            button1 = new Button();
+            button2 = new Button();
+            btnbaocaohieusuat = new Button();
             bsdt = new Button();
             bcdttheothang = new Button();
             button3 = new Button();
@@ -58,15 +61,16 @@
             bcdttheothang.UseVisualStyleBackColor = true;
             bcdttheothang.Click += bcdttheothang_Click;
             // 
-            // button3
+            // btnbaocaohieusuat
             // 
-            button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            button3.Location = new Point(765, 241);
-            button3.Name = "button3";
-            button3.Size = new Size(188, 172);
-            button3.TabIndex = 2;
-            button3.Text = "Báo cáo hiệu suất sử dụng từng loại phòng";
-            button3.UseVisualStyleBackColor = true;
+            btnbaocaohieusuat.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btnbaocaohieusuat.Location = new Point(765, 241);
+            btnbaocaohieusuat.Name = "btnbaocaohieusuat";
+            btnbaocaohieusuat.Size = new Size(188, 172);
+            btnbaocaohieusuat.TabIndex = 2;
+            btnbaocaohieusuat.Text = "Báo cáo hiệu suất sử dụng từng loại phòng";
+            btnbaocaohieusuat.UseVisualStyleBackColor = true;
+            btnbaocaohieusuat.Click += btnbaocaohieusuat_Click;
             // 
             // cbxThang
             // 
@@ -107,13 +111,9 @@
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(txtNam);
-            Controls.Add(cbxThang);
-            Controls.Add(button3);
-            Controls.Add(bcdttheothang);
-            Controls.Add(bsdt);
+            Controls.Add(btnbaocaohieusuat);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Font = new Font("Segoe UI", 12F);
             Margin = new Padding(4);
             Name = "UCQuanLyBaoCao";
@@ -125,12 +125,8 @@
 
         #endregion
 
-        private Button bsdt;
-        private Button bcdttheothang;
-        private Button button3;
-        private ComboBox cbxThang;
-        private TextBox txtNam;
-        private Label label1;
-        private Label label2;
+        private Button button1;
+        private Button button2;
+        private Button btnbaocaohieusuat;
     }
 }
