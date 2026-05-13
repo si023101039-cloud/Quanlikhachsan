@@ -1,6 +1,4 @@
-﻿using QuanLyKhachSan.BUS;
-using QuanLyKhachSan.DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,20 +16,10 @@ namespace QuanLyKhachSan.GUI
         public UCQuanLyDatPhong()
         {
             InitializeComponent();
+        }
 
-        }
-        private void LoadData()
-        {
-            dgvPhieuDatPhong.DataSource = bus.LayDSPhieu();
-        }
         private void UCQuanLyDatPhong_Load(object sender, EventArgs e)
         {
-            LoadData();
-            cbtrangthai.Items.Clear();
-            cbtrangthai.Items.Add("Tất cả");
-            cbtrangthai.Items.Add("Đã xác nhận");
-            cbtrangthai.Items.Add("Chưa xác nhận");
-            cbtrangthai.SelectedIndex = 0;
             dgvPhieuDatPhong.ReadOnly = true;
             dgvPhieuDatPhong.AllowUserToAddRows = false;
             dgvPhieuDatPhong.AllowUserToDeleteRows = false;
