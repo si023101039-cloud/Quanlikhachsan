@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyKhachSan.BUS;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -135,6 +136,110 @@ namespace QuanLyKhachSan.GUI
             dgvCTPDP.CurrentCell = null;
             dgvCTPDP.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 122, 204);
             dgvCTPDP.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+            cbtrangthai.Items.Clear();
+
+            cbtrangthai.Items.Add("Đang thuê");
+            cbtrangthai.Items.Add("Đã trả");
+
+            cbtrangthai.SelectedIndex = 0;
+            LoadDanhSach();
+        }
+
+        void LoadDanhSach()
+        {
+            dgvPhieuDatPhong.DataSource = bus.GetAllPhieuDatPhong();
+            if (dgvPhieuDatPhong.Rows.Count > 0)
+            {
+                dgvPhieuDatPhong.Columns["MaPhieuDatPhong"].Visible = false;
+                dgvPhieuDatPhong.Columns["MaKH"].Visible = false;
+            }
+        }
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bttraphong_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                if (dgvPhieuDatPhong.CurrentRow == null)
+                {
+                    MessageBox.Show("Vui lòng chọn phiếu đặt phòng");
+                    return;
+                }
+
+                int maPhieu =
+                    Convert.ToInt32(
+                        dgvPhieuDatPhong.CurrentRow
+                        .Cells["MaPhieuDatPhong"]
+                        .Value);
+
+                bool result = bus.TraPhong(maPhieu);
+
+                if (result)
+                {
+                    MessageBox.Show("Trả phòng thành công");
+
+                    LoadDanhSach();
+                }
+                else
+                {
+                    MessageBox.Show("Trả phòng thất bại");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btcapnhat_Click(object sender, EventArgs e)
+        {
+            bool result = bus.CapNhatTrangThaiPhong();
+
+            if (result)
+            {
+                MessageBox.Show("Cập nhật trạng thái phòng thành công");
+            }
+            else
+            {
+                MessageBox.Show("Cập nhật trạng thái phòng thất bại");
+            }
+        }
+
+        private void dgvPhieuDatPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row =
+                    dgvPhieuDatPhong.Rows[e.RowIndex];
+
+                txttenKH.Text =
+                    row.Cells["TenKH"].Value.ToString();
+
+                datengaydat.Value =
+                    Convert.ToDateTime(
+                        row.Cells["NgayDat"].Value);
+
+                datengaynhan.Value =
+                    Convert.ToDateTime(
+                        row.Cells["NgayNhan"].Value);
+
+                datengaytra.Value =
+                    Convert.ToDateTime(
+                        row.Cells["NgayTra"].Value);
+
+               cbtrangthai.Text =
+                    Convert.ToBoolean(
+                        row.Cells["TrangThaiPhieu"].Value)
+                    ? "Đang thuê"
+                    : "Đã trả";
+
+                richghichu.Text =
+                    row.Cells["GhiChu"].Value?.ToString();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)//dat phong

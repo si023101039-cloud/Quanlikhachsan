@@ -104,10 +104,11 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Location = new Point(5, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(338, 599);
+            groupBox1.Size = new Size(338, 609);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin phiếu đặt phòng:";
+            groupBox1.Enter += groupBox1_Enter;
             // 
             // label9
             // 
@@ -362,7 +363,7 @@
             Font = new Font("Segoe UI", 12F);
             Margin = new Padding(4);
             Name = "UCQuanLyDatPhong";
-            Size = new Size(1034, 651);
+            Size = new Size(1034, 634);
             Load += UCQuanLyDatPhong_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPhieuDatPhong).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvCTPDP).EndInit();
