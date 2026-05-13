@@ -42,6 +42,7 @@
             panel3 = new Panel();
             lblpage = new Label();
             pnlMain = new Panel();
+            btnXemLSDatPhong = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -99,6 +100,7 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(btnXemLSDatPhong);
             panel2.Controls.Add(btnQuanLyLoaiPhong);
             panel2.Controls.Add(btnQuanLyBaoCao);
             panel2.Controls.Add(btnQuanLyDatPhong);
@@ -115,6 +117,7 @@
             btnQuanLyLoaiPhong.Cursor = Cursors.Hand;
             btnQuanLyLoaiPhong.FlatAppearance.BorderSize = 0;
             btnQuanLyLoaiPhong.FlatStyle = FlatStyle.Flat;
+            btnQuanLyLoaiPhong.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             btnQuanLyLoaiPhong.Image = (Image)resources.GetObject("btnQuanLyLoaiPhong.Image");
             btnQuanLyLoaiPhong.Location = new Point(3, 105);
             btnQuanLyLoaiPhong.Name = "btnQuanLyLoaiPhong";
@@ -131,6 +134,7 @@
             btnQuanLyBaoCao.Cursor = Cursors.Hand;
             btnQuanLyBaoCao.FlatAppearance.BorderSize = 0;
             btnQuanLyBaoCao.FlatStyle = FlatStyle.Flat;
+            btnQuanLyBaoCao.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             btnQuanLyBaoCao.Image = (Image)resources.GetObject("btnQuanLyBaoCao.Image");
             btnQuanLyBaoCao.Location = new Point(3, 381);
             btnQuanLyBaoCao.Name = "btnQuanLyBaoCao";
@@ -147,6 +151,7 @@
             btnQuanLyDatPhong.Cursor = Cursors.Hand;
             btnQuanLyDatPhong.FlatAppearance.BorderSize = 0;
             btnQuanLyDatPhong.FlatStyle = FlatStyle.Flat;
+            btnQuanLyDatPhong.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             btnQuanLyDatPhong.Image = (Image)resources.GetObject("btnQuanLyDatPhong.Image");
             btnQuanLyDatPhong.Location = new Point(3, 197);
             btnQuanLyDatPhong.Name = "btnQuanLyDatPhong";
@@ -163,6 +168,7 @@
             btnQuanLyDichVu.Cursor = Cursors.Hand;
             btnQuanLyDichVu.FlatAppearance.BorderSize = 0;
             btnQuanLyDichVu.FlatStyle = FlatStyle.Flat;
+            btnQuanLyDichVu.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             btnQuanLyDichVu.Image = (Image)resources.GetObject("btnQuanLyDichVu.Image");
             btnQuanLyDichVu.Location = new Point(3, 289);
             btnQuanLyDichVu.Name = "btnQuanLyDichVu";
@@ -179,6 +185,7 @@
             btnQuanLyPhong.Cursor = Cursors.Hand;
             btnQuanLyPhong.FlatAppearance.BorderSize = 0;
             btnQuanLyPhong.FlatStyle = FlatStyle.Flat;
+            btnQuanLyPhong.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             btnQuanLyPhong.Image = (Image)resources.GetObject("btnQuanLyPhong.Image");
             btnQuanLyPhong.Location = new Point(3, 13);
             btnQuanLyPhong.Name = "btnQuanLyPhong";
@@ -214,6 +221,22 @@
             pnlMain.Name = "pnlMain";
             pnlMain.Size = new Size(1034, 651);
             pnlMain.TabIndex = 3;
+            // 
+            // btnXemLSDatPhong
+            // 
+            btnXemLSDatPhong.BackColor = Color.Orange;
+            btnXemLSDatPhong.Cursor = Cursors.Hand;
+            btnXemLSDatPhong.FlatAppearance.BorderSize = 0;
+            btnXemLSDatPhong.FlatStyle = FlatStyle.Flat;
+            btnXemLSDatPhong.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btnXemLSDatPhong.Image = (Image)resources.GetObject("btnXemLSDatPhong.Image");
+            btnXemLSDatPhong.Location = new Point(3, 474);
+            btnXemLSDatPhong.Name = "btnXemLSDatPhong";
+            btnXemLSDatPhong.Size = new Size(182, 72);
+            btnXemLSDatPhong.TabIndex = 8;
+            btnXemLSDatPhong.Text = "Xem lịch sử đặt phòng";
+            btnXemLSDatPhong.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnXemLSDatPhong.UseVisualStyleBackColor = false;
             // 
             // frm_main
             // 
@@ -256,5 +279,6 @@
         private Button btnQuanLyDichVu;
         private Button btnQuanLyPhong;
         private Label lblpage;
+        private Button btnXemLSDatPhong;
     }
 }
