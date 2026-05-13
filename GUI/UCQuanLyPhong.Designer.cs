@@ -124,7 +124,7 @@
             btnHuy.Name = "btnHuy";
             btnHuy.Size = new Size(132, 49);
             btnHuy.TabIndex = 6;
-            btnHuy.Text = "Hủy";
+            btnHuy.Text = "Làm mới";
             btnHuy.UseVisualStyleBackColor = false;
             btnHuy.Click += btnHuy_Click;
             // 

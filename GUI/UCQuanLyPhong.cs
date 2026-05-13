@@ -31,6 +31,15 @@ namespace QuanLyKhachSan.GUI
         {
             dgvPhong.DataSource = phong_BUS.LayTatCaPhong();
             if (dgvPhong.Columns["LoaiPhong"] != null) dgvPhong.Columns["LoaiPhong"].Visible = false;
+            for (int i = 0; i < dgvPhong.Rows.Count; i++)
+            {
+                if (Convert.ToInt32(dgvPhong.Rows[i].Cells["Tang"].Value) == 0)
+                {
+                    dgvPhong.Rows[i].Cells["Tang"].Value = "1";
+                }
+
+            }
+            dgvPhong.Columns["MaPhong"].Visible = false;
         }
         private void ResetInput()
         {
@@ -50,6 +59,7 @@ namespace QuanLyKhachSan.GUI
         }
         private void UCQuanLyPhong_Load(object sender, EventArgs e)
         {
+            txtTenPhong.Enabled = false;
             dgvPhong.ReadOnly = true;
             dgvPhong.AllowUserToAddRows = false;
             dgvPhong.AllowUserToDeleteRows = false;
@@ -95,6 +105,8 @@ namespace QuanLyKhachSan.GUI
             LoadLoaiPhong();
             LoadData();
             loadtrangthai();
+            phong_BUS.CapNhatTenPhong();
+
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)
@@ -109,10 +121,39 @@ namespace QuanLyKhachSan.GUI
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            int tang = (int)numtang.Value;
+
+            int soLonNhat = 0;
+
+        
+            for (int i = 0; i < dgvPhong.Rows.Count; i++)
+            {
+                string tenPhong = dgvPhong.Rows[i].Cells["TenPhong"].Value.ToString();
+
+                
+                if (tenPhong.StartsWith("P" + tang))
+                {
+                  
+                    int so = Convert.ToInt32(tenPhong.Substring(2));
+
+                    
+                    if (so > soLonNhat)
+                    {
+                        soLonNhat = so;
+                    }
+                }
+            }
+
+            
+            string tenPhongMoi = "P" + tang + (soLonNhat + 1).ToString("00");
+
+            txtTenPhong.Text = tenPhongMoi;
+
             DTOQlyphong phong = new DTOQlyphong
             {
-                TenPhong = txtTenPhong.Text,
+                TenPhong = tenPhongMoi,
                 MaLoaiPhong = (int)cboLoaiPhong.SelectedValue,
+                Tang = tang,
                 TrangThai = cboTrangThai.SelectedIndex == 1,
                 MoTa = rtxtMoTa.Text,
                 GhiChu = rtxtGhiChu.Text
@@ -124,20 +165,24 @@ namespace QuanLyKhachSan.GUI
                 LoadData();
                 ResetInput();
             }
-            else MessageBox.Show("Thêm thất bại!");
+            else
+            {
+                MessageBox.Show("Thêm thất bại!");
+            }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-
             if (dgvPhong.SelectedRows.Count > 0)
             {
                 int maPhong = Convert.ToInt32(dgvPhong.CurrentRow.Cells["MaPhong"].Value);
+
                 DTOQlyphong phong = new DTOQlyphong
                 {
                     MaPhong = maPhong,
                     TenPhong = txtTenPhong.Text,
                     MaLoaiPhong = (int)cboLoaiPhong.SelectedValue,
+                    Tang = (int)numtang.Value,
                     TrangThai = cboTrangThai.SelectedIndex == 1,
                     MoTa = rtxtMoTa.Text,
                     GhiChu = rtxtGhiChu.Text
@@ -149,7 +194,10 @@ namespace QuanLyKhachSan.GUI
                     LoadData();
                 }
             }
-            else MessageBox.Show("Vui lòng chọn phòng cần sửa trên lưới!");
+            else
+            {
+                MessageBox.Show("Vui lòng chọn phòng cần sửa trên lưới!");
+            }
         }
 
         private void btnXoa_Click(object sender, EventArgs e)

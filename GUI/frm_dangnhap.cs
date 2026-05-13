@@ -45,12 +45,17 @@ namespace QuanLyKhachSan.GUI
 
                 this.Hide();
                 frm.ShowDialog();
-                this.Close();
+
             }
             else
             {
                 MessageBox.Show("Tài khoản hoặc mật khẩu không đúng!", "Thông báo");
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
