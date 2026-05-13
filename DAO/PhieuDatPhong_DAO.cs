@@ -10,17 +10,32 @@ namespace QuanLyKhachSan.DAO
     {
         private MyDbContext db = new MyDbContext();
 
-        // LẤY DANH SÁCH PHIẾU ĐẶT PHÒNG
-        public List<PhieuDatPhong_DTO> GetAllPhieuDatPhong()
+        public List<PhieuDatPhong_View> GetAllPhieuDatPhong()
         {
             try
             {
-                return db.PhieuDatPhong_Entities.ToList();
+                var data = (from pdp in db.PhieuDatPhong_Entities
+                            join kh in db.KhachHang_Entities
+                            on pdp.MaKH equals kh.MaKH
+                            select new PhieuDatPhong_View
+                            {
+                                MaPhieuDatPhong = pdp.MaPhieuDatPhong,
+                                MaKH = pdp.MaKH,
+                                TenKH = kh.TenKH,
+                                MaNV = pdp.MaNV,
+                                NgayDat = pdp.NgayDat,
+                                NgayNhan = pdp.NgayNhan,
+                                NgayTra = pdp.NgayTra,
+                                TrangThaiPhieu = pdp.TrangThaiPhieu,
+                                GhiChu = pdp.GhiChu
+                            }).ToList();
+
+                return data;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi: " + ex.Message);
-                return new List<PhieuDatPhong_DTO>();
+                return new List<PhieuDatPhong_View>();
             }
         }
 

@@ -118,6 +118,11 @@ namespace QuanLyKhachSan.GUI
         void LoadDanhSach()
         {
             dgvPhieuDatPhong.DataSource = bus.GetAllPhieuDatPhong();
+            if (dgvPhieuDatPhong.Rows.Count > 0)
+            {
+                dgvPhieuDatPhong.Columns["MaPhieuDatPhong"].Visible = false;
+                dgvPhieuDatPhong.Columns["MaKH"].Visible = false;
+            }
         }
         private void groupBox1_Enter(object sender, EventArgs e)
         {
@@ -181,8 +186,8 @@ namespace QuanLyKhachSan.GUI
                 DataGridViewRow row =
                     dgvPhieuDatPhong.Rows[e.RowIndex];
 
-                txtKH.Text =
-                    row.Cells["MaKH"].Value.ToString();
+                txttenKH.Text =
+                    row.Cells["TenKH"].Value.ToString();
 
                 datengaydat.Value =
                     Convert.ToDateTime(

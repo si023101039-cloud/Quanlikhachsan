@@ -13,7 +13,7 @@ namespace QuanLyKhachSan.BUS
         private PhieuDatPhong_DAO phieuDatPhong_DAO
             = new PhieuDatPhong_DAO();
 
-        public List<PhieuDatPhong_DTO> GetAllPhieuDatPhong()
+        public List<PhieuDatPhong_View> GetAllPhieuDatPhong()
         {
             return phieuDatPhong_DAO.GetAllPhieuDatPhong();
         }

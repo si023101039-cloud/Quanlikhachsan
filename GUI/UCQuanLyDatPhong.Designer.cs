@@ -41,7 +41,7 @@
             button1 = new Button();
             datengaytra = new DateTimePicker();
             datengaydat = new DateTimePicker();
-            txtKH = new TextBox();
+            txttenKH = new TextBox();
             label8 = new Label();
             label7 = new Label();
             label6 = new Label();
@@ -86,7 +86,7 @@
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(datengaytra);
             groupBox1.Controls.Add(datengaydat);
-            groupBox1.Controls.Add(txtKH);
+            groupBox1.Controls.Add(txttenKH);
             groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(label6);
@@ -153,7 +153,7 @@
             cbtrangthai.FormattingEnabled = true;
             cbtrangthai.Location = new Point(155, 198);
             cbtrangthai.Name = "cbtrangthai";
-            cbtrangthai.Size = new Size(177, 29);
+            cbtrangthai.Size = new Size(177, 36);
             cbtrangthai.TabIndex = 16;
             // 
             // bttraphong
@@ -178,7 +178,7 @@
             datengaynhan.Format = DateTimePickerFormat.Short;
             datengaynhan.Location = new Point(155, 117);
             datengaynhan.Name = "datengaynhan";
-            datengaynhan.Size = new Size(177, 29);
+            datengaynhan.Size = new Size(177, 34);
             datengaynhan.TabIndex = 15;
             // 
             // button1
@@ -202,7 +202,7 @@
             datengaytra.Format = DateTimePickerFormat.Short;
             datengaytra.Location = new Point(155, 157);
             datengaytra.Name = "datengaytra";
-            datengaytra.Size = new Size(177, 29);
+            datengaytra.Size = new Size(177, 34);
             datengaytra.TabIndex = 14;
             // 
             // datengaydat
@@ -212,17 +212,17 @@
             datengaydat.Format = DateTimePickerFormat.Short;
             datengaydat.Location = new Point(155, 78);
             datengaydat.Name = "datengaydat";
-            datengaydat.Size = new Size(177, 29);
+            datengaydat.Size = new Size(177, 34);
             datengaydat.TabIndex = 13;
             // 
-            // txtKH
+            // txttenKH
             // 
-            txtKH.BackColor = Color.WhiteSmoke;
-            txtKH.BorderStyle = BorderStyle.None;
-            txtKH.Location = new Point(155, 38);
-            txtKH.Name = "txtKH";
-            txtKH.Size = new Size(177, 22);
-            txtKH.TabIndex = 12;
+            txttenKH.BackColor = Color.WhiteSmoke;
+            txttenKH.BorderStyle = BorderStyle.None;
+            txttenKH.Location = new Point(155, 38);
+            txttenKH.Name = "txttenKH";
+            txttenKH.Size = new Size(177, 27);
+            txttenKH.TabIndex = 12;
             // 
             // label8
             // 
@@ -230,7 +230,7 @@
             label8.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label8.Location = new Point(0, 235);
             label8.Name = "label8";
-            label8.Size = new Size(68, 21);
+            label8.Size = new Size(87, 28);
             label8.TabIndex = 11;
             label8.Text = "Ghi chú:";
             // 
@@ -240,7 +240,7 @@
             label7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label7.Location = new Point(0, 196);
             label7.Name = "label7";
-            label7.Size = new Size(86, 21);
+            label7.Size = new Size(107, 28);
             label7.TabIndex = 10;
             label7.Text = "Trạng thái:";
             // 
@@ -250,7 +250,7 @@
             label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label6.Location = new Point(0, 157);
             label6.Name = "label6";
-            label6.Size = new Size(76, 21);
+            label6.Size = new Size(94, 28);
             label6.TabIndex = 9;
             label6.Text = "Ngày trả:";
             // 
@@ -260,7 +260,7 @@
             label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label5.Location = new Point(0, 118);
             label5.Name = "label5";
-            label5.Size = new Size(91, 21);
+            label5.Size = new Size(116, 28);
             label5.TabIndex = 8;
             label5.Text = "Ngày nhận:";
             // 
@@ -270,7 +270,7 @@
             label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label4.Location = new Point(0, 79);
             label4.Name = "label4";
-            label4.Size = new Size(80, 21);
+            label4.Size = new Size(99, 28);
             label4.TabIndex = 7;
             label4.Text = "Ngày đặt:";
             // 
@@ -280,7 +280,7 @@
             label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label3.Location = new Point(0, 40);
             label3.Name = "label3";
-            label3.Size = new Size(125, 21);
+            label3.Size = new Size(161, 28);
             label3.TabIndex = 6;
             label3.Text = "Tên khách hàng:";
             // 
@@ -290,7 +290,7 @@
             label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(769, 12);
             label1.Name = "label1";
-            label1.Size = new Size(208, 21);
+            label1.Size = new Size(265, 28);
             label1.TabIndex = 4;
             label1.Text = "Danh sách phiếu đặt phòng";
             // 
@@ -300,13 +300,13 @@
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label2.Location = new Point(799, 348);
             label2.Name = "label2";
-            label2.Size = new Size(187, 21);
+            label2.Size = new Size(236, 28);
             label2.TabIndex = 5;
             label2.Text = "Chi tiết phiếu đặt phòng";
             // 
             // UCQuanLyDatPhong
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             Controls.Add(label2);
@@ -334,7 +334,7 @@
         private GroupBox groupBox1;
         private Label label1;
         private Label label2;
-        private TextBox txtKH;
+        private TextBox txttenKH;
         private Label label8;
         private Label label7;
         private Label label6;
