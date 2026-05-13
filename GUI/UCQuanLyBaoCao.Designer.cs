@@ -31,27 +31,35 @@
             button1 = new Button();
             button2 = new Button();
             btnbaocaohieusuat = new Button();
+            bsdt = new Button();
+            bcdttheothang = new Button();
+            button3 = new Button();
+            cbxThang = new ComboBox();
+            txtNam = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
-            // button1
+            // bsdt
             // 
-            button1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            button1.Location = new Point(75, 241);
-            button1.Name = "button1";
-            button1.Size = new Size(188, 172);
-            button1.TabIndex = 0;
-            button1.Text = "Báo cáo tỷ lệ sử dụng phòng";
-            button1.UseVisualStyleBackColor = true;
+            bsdt.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            bsdt.Location = new Point(75, 241);
+            bsdt.Name = "bsdt";
+            bsdt.Size = new Size(188, 172);
+            bsdt.TabIndex = 0;
+            bsdt.Text = "Báo cáo tỷ lệ sử dụng phòng";
+            bsdt.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // bcdttheothang
             // 
-            button2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.Location = new Point(420, 241);
-            button2.Name = "button2";
-            button2.Size = new Size(188, 172);
-            button2.TabIndex = 1;
-            button2.Text = "Báo cáo doanh thu theo tháng";
-            button2.UseVisualStyleBackColor = true;
+            bcdttheothang.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bcdttheothang.Location = new Point(420, 241);
+            bcdttheothang.Name = "bcdttheothang";
+            bcdttheothang.Size = new Size(188, 172);
+            bcdttheothang.TabIndex = 1;
+            bcdttheothang.Text = "Báo cáo doanh thu theo tháng";
+            bcdttheothang.UseVisualStyleBackColor = true;
+            bcdttheothang.Click += bcdttheothang_Click;
             // 
             // btnbaocaohieusuat
             // 
@@ -64,6 +72,41 @@
             btnbaocaohieusuat.UseVisualStyleBackColor = true;
             btnbaocaohieusuat.Click += btnbaocaohieusuat_Click;
             // 
+            // cbxThang
+            // 
+            cbxThang.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxThang.FormattingEnabled = true;
+            cbxThang.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" });
+            cbxThang.Location = new Point(437, 446);
+            cbxThang.Name = "cbxThang";
+            cbxThang.Size = new Size(151, 36);
+            cbxThang.TabIndex = 3;
+            // 
+            // txtNam
+            // 
+            txtNam.Location = new Point(437, 515);
+            txtNam.Name = "txtNam";
+            txtNam.Size = new Size(151, 34);
+            txtNam.TabIndex = 4;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(420, 417);
+            label1.Name = "label1";
+            label1.Size = new Size(70, 28);
+            label1.TabIndex = 5;
+            label1.Text = "Tháng:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(423, 484);
+            label2.Name = "label2";
+            label2.Size = new Size(58, 28);
+            label2.TabIndex = 6;
+            label2.Text = "Năm:";
+            // 
             // UCQuanLyBaoCao
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
@@ -75,7 +118,9 @@
             Margin = new Padding(4);
             Name = "UCQuanLyBaoCao";
             Size = new Size(1034, 651);
+            Load += UCQuanLyBaoCao_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
