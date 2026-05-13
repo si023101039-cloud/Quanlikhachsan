@@ -33,15 +33,15 @@
             groupBox1 = new GroupBox();
             panel1 = new Panel();
             button4 = new Button();
-            richTextBox1 = new RichTextBox();
-            button3 = new Button();
-            comboBox1 = new ComboBox();
-            button2 = new Button();
-            dateTimePicker3 = new DateTimePicker();
+            richghichu = new RichTextBox();
+            btcapnhat = new Button();
+            cbtrangthai = new ComboBox();
+            bttraphong = new Button();
+            datengaynhan = new DateTimePicker();
             button1 = new Button();
-            dateTimePicker2 = new DateTimePicker();
-            dateTimePicker1 = new DateTimePicker();
-            textBox1 = new TextBox();
+            datengaytra = new DateTimePicker();
+            datengaydat = new DateTimePicker();
+            txttenKH = new TextBox();
             label8 = new Label();
             label7 = new Label();
             label6 = new Label();
@@ -63,6 +63,7 @@
             dgvPhieuDatPhong.RowHeadersWidth = 51;
             dgvPhieuDatPhong.Size = new Size(680, 287);
             dgvPhieuDatPhong.TabIndex = 0;
+            dgvPhieuDatPhong.CellContentClick += dgvPhieuDatPhong_CellContentClick;
             // 
             // dgvCTPDP
             // 
@@ -77,15 +78,15 @@
             // 
             groupBox1.Controls.Add(panel1);
             groupBox1.Controls.Add(button4);
-            groupBox1.Controls.Add(richTextBox1);
-            groupBox1.Controls.Add(button3);
-            groupBox1.Controls.Add(comboBox1);
-            groupBox1.Controls.Add(button2);
-            groupBox1.Controls.Add(dateTimePicker3);
+            groupBox1.Controls.Add(richghichu);
+            groupBox1.Controls.Add(btcapnhat);
+            groupBox1.Controls.Add(cbtrangthai);
+            groupBox1.Controls.Add(bttraphong);
+            groupBox1.Controls.Add(datengaynhan);
             groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(dateTimePicker2);
-            groupBox1.Controls.Add(dateTimePicker1);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(datengaytra);
+            groupBox1.Controls.Add(datengaydat);
+            groupBox1.Controls.Add(txttenKH);
             groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(label6);
@@ -94,10 +95,11 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Location = new Point(5, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(338, 599);
+            groupBox1.Size = new Size(338, 609);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin phiếu đặt phòng:";
+            groupBox1.Enter += groupBox1_Enter;
             // 
             // panel1
             // 
@@ -121,61 +123,63 @@
             button4.Text = "Kiểm tra tình trạng phòng";
             button4.UseVisualStyleBackColor = false;
             // 
-            // richTextBox1
+            // richghichu
             // 
-            richTextBox1.BorderStyle = BorderStyle.None;
-            richTextBox1.Location = new Point(155, 240);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(177, 72);
-            richTextBox1.TabIndex = 17;
-            richTextBox1.Text = "";
+            richghichu.BorderStyle = BorderStyle.None;
+            richghichu.Location = new Point(155, 240);
+            richghichu.Name = "richghichu";
+            richghichu.Size = new Size(177, 72);
+            richghichu.TabIndex = 17;
+            richghichu.Text = "";
             // 
-            // button3
+            // btcapnhat
             // 
-            button3.BackColor = Color.CornflowerBlue;
-            button3.Cursor = Cursors.Hand;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button3.Location = new Point(33, 551);
-            button3.Name = "button3";
-            button3.Size = new Size(273, 48);
-            button3.TabIndex = 8;
-            button3.Text = "Cập nhật trạng thái phòng";
-            button3.UseVisualStyleBackColor = false;
+            btcapnhat.BackColor = Color.CornflowerBlue;
+            btcapnhat.Cursor = Cursors.Hand;
+            btcapnhat.FlatAppearance.BorderSize = 0;
+            btcapnhat.FlatStyle = FlatStyle.Flat;
+            btcapnhat.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btcapnhat.Location = new Point(33, 331);
+            btcapnhat.Name = "btcapnhat";
+            btcapnhat.Size = new Size(273, 48);
+            btcapnhat.TabIndex = 8;
+            btcapnhat.Text = "Cập nhật trạng thái phòng";
+            btcapnhat.UseVisualStyleBackColor = false;
+            btcapnhat.Click += btcapnhat_Click;
             // 
-            // comboBox1
+            // cbtrangthai
             // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(155, 198);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(177, 36);
-            comboBox1.TabIndex = 16;
+            cbtrangthai.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbtrangthai.FormattingEnabled = true;
+            cbtrangthai.Location = new Point(155, 198);
+            cbtrangthai.Name = "cbtrangthai";
+            cbtrangthai.Size = new Size(177, 36);
+            cbtrangthai.TabIndex = 16;
             // 
-            // button2
+            // bttraphong
             // 
-            button2.BackColor = Color.Red;
-            button2.Cursor = Cursors.Hand;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.Location = new Point(171, 413);
-            button2.Name = "button2";
-            button2.Size = new Size(152, 48);
-            button2.TabIndex = 7;
-            button2.Text = "Trả phòng";
-            button2.UseVisualStyleBackColor = false;
+            bttraphong.BackColor = Color.Red;
+            bttraphong.Cursor = Cursors.Hand;
+            bttraphong.FlatAppearance.BorderSize = 0;
+            bttraphong.FlatStyle = FlatStyle.Flat;
+            bttraphong.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bttraphong.Location = new Point(171, 413);
+            bttraphong.Name = "bttraphong";
+            bttraphong.Size = new Size(152, 48);
+            bttraphong.TabIndex = 7;
+            bttraphong.Text = "Trả phòng";
+            bttraphong.UseVisualStyleBackColor = false;
+            bttraphong.Click += bttraphong_Click;
             // 
-            // dateTimePicker3
+            // datengaynhan
             // 
-            dateTimePicker3.CalendarForeColor = Color.WhiteSmoke;
-            dateTimePicker3.CalendarMonthBackground = Color.WhiteSmoke;
-            dateTimePicker3.Format = DateTimePickerFormat.Short;
-            dateTimePicker3.Location = new Point(155, 117);
-            dateTimePicker3.Name = "dateTimePicker3";
-            dateTimePicker3.Size = new Size(177, 34);
-            dateTimePicker3.TabIndex = 15;
+            datengaynhan.CalendarForeColor = Color.WhiteSmoke;
+            datengaynhan.CalendarMonthBackground = Color.WhiteSmoke;
+            datengaynhan.Format = DateTimePickerFormat.Short;
+            datengaynhan.Location = new Point(155, 117);
+            datengaynhan.Name = "datengaynhan";
+            datengaynhan.Size = new Size(177, 34);
+            datengaynhan.TabIndex = 15;
             // 
             // button1
             // 
@@ -191,34 +195,34 @@
             button1.Text = "Đặt phòng";
             button1.UseVisualStyleBackColor = false;
             // 
-            // dateTimePicker2
+            // datengaytra
             // 
-            dateTimePicker2.CalendarForeColor = Color.WhiteSmoke;
-            dateTimePicker2.CalendarMonthBackground = Color.WhiteSmoke;
-            dateTimePicker2.Format = DateTimePickerFormat.Short;
-            dateTimePicker2.Location = new Point(155, 157);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(177, 34);
-            dateTimePicker2.TabIndex = 14;
+            datengaytra.CalendarForeColor = Color.WhiteSmoke;
+            datengaytra.CalendarMonthBackground = Color.WhiteSmoke;
+            datengaytra.Format = DateTimePickerFormat.Short;
+            datengaytra.Location = new Point(155, 157);
+            datengaytra.Name = "datengaytra";
+            datengaytra.Size = new Size(177, 34);
+            datengaytra.TabIndex = 14;
             // 
-            // dateTimePicker1
+            // datengaydat
             // 
-            dateTimePicker1.CalendarForeColor = Color.WhiteSmoke;
-            dateTimePicker1.CalendarMonthBackground = Color.WhiteSmoke;
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(155, 78);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(177, 34);
-            dateTimePicker1.TabIndex = 13;
+            datengaydat.CalendarForeColor = Color.WhiteSmoke;
+            datengaydat.CalendarMonthBackground = Color.WhiteSmoke;
+            datengaydat.Format = DateTimePickerFormat.Short;
+            datengaydat.Location = new Point(155, 78);
+            datengaydat.Name = "datengaydat";
+            datengaydat.Size = new Size(177, 34);
+            datengaydat.TabIndex = 13;
             // 
-            // textBox1
+            // txttenKH
             // 
-            textBox1.BackColor = Color.WhiteSmoke;
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(155, 38);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(177, 27);
-            textBox1.TabIndex = 12;
+            txttenKH.BackColor = Color.WhiteSmoke;
+            txttenKH.BorderStyle = BorderStyle.None;
+            txttenKH.Location = new Point(155, 38);
+            txttenKH.Name = "txttenKH";
+            txttenKH.Size = new Size(177, 27);
+            txttenKH.TabIndex = 12;
             // 
             // label8
             // 
@@ -313,7 +317,7 @@
             Font = new Font("Segoe UI", 12F);
             Margin = new Padding(4);
             Name = "UCQuanLyDatPhong";
-            Size = new Size(1034, 651);
+            Size = new Size(1034, 634);
             Load += UCQuanLyDatPhong_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPhieuDatPhong).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvCTPDP).EndInit();
@@ -330,22 +334,22 @@
         private GroupBox groupBox1;
         private Label label1;
         private Label label2;
-        private TextBox textBox1;
+        private TextBox txttenKH;
         private Label label8;
         private Label label7;
         private Label label6;
         private Label label5;
         private Label label4;
         private Label label3;
-        private RichTextBox richTextBox1;
-        private ComboBox comboBox1;
-        private DateTimePicker dateTimePicker3;
-        private DateTimePicker dateTimePicker2;
-        private DateTimePicker dateTimePicker1;
+        private RichTextBox richghichu;
+        private ComboBox cbtrangthai;
+        private DateTimePicker datengaynhan;
+        private DateTimePicker datengaytra;
+        private DateTimePicker datengaydat;
         private Button button1;
         private Button button4;
-        private Button button3;
-        private Button button2;
+        private Button btcapnhat;
+        private Button bttraphong;
         private Panel panel1;
     }
 }
