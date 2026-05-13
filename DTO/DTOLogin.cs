@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuanLyKhachSan.DTO
 {
@@ -12,12 +7,16 @@ namespace QuanLyKhachSan.DTO
     public class TaiKhoan_DTO
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MaTK { get; set; }
 
         public int? MaNV { get; set; }
+
+        [Column("TenDangNhap", TypeName = "varchar")]
         public string TenDangNhap { get; set; }
+
+        [Column("MatKhau", TypeName = "varchar")]
         public string MatKhau { get; set; }
+
         public string VaiTro { get; set; }
         public DateTime? NgayTao { get; set; }
         public bool? TrangThai { get; set; }
@@ -25,6 +24,7 @@ namespace QuanLyKhachSan.DTO
         [ForeignKey("MaNV")]
         public virtual NhanVien_DTO NhanVien { get; set; }
     }
+
     [Table("NhanVien")]
     public class NhanVien_DTO
     {
@@ -32,5 +32,8 @@ namespace QuanLyKhachSan.DTO
         public int MaNV { get; set; }
         public string HoTen { get; set; }
         public string ChucVu { get; set; }
+        // Thêm các cột khác từ script nếu cần dùng
+        public string Sdt { get; set; }
+        public bool? TrangThai { get; set; }
     }
 }

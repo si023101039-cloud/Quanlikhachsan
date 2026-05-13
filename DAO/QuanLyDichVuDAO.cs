@@ -65,7 +65,7 @@ namespace QuanLyKhachSan.DAO
             try
             {
                 db.ChiTietDichVu_Entities.Add(ctdv);
-                return db.SaveChange() > 0;
+                return db.SaveChanges() > 0;
             }
             catch { return false; }
         }
