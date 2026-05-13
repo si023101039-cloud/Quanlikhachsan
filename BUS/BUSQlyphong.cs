@@ -38,5 +38,9 @@ namespace QuanLyKhachSan.BUS
             if (string.IsNullOrEmpty(keyword)) return dao.GetAll();
             return dao.Search(keyword);
         }
+        public void CapNhatTenPhong()
+        {
+            dao.CapNhatTenPhong();
+        }
     }
 }

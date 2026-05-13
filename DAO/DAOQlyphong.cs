@@ -68,5 +68,16 @@ namespace QuanLyKhachSan.DAO
                      .Where(p => p.TenPhong.Contains(keyword))
                      .ToList();
         }
+        public void CapNhatTenPhong()
+        {
+            var phong = db.Phong_Entities
+                          .FirstOrDefault(p => p.TenPhong == "P305");
+
+            if (phong != null)
+            {
+                phong.TenPhong = "P301";
+                db.SaveChanges();
+            }
+        }
     }
 }
