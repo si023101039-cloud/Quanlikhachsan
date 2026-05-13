@@ -153,6 +153,24 @@ namespace QuanLyKhachSan.GUI
                     return;
                 }
 
+                if (txtten.Text.Any(char.IsDigit))
+                {
+                    MessageBox.Show("Tên khách hàng không được chứa số");
+                    return;
+                }
+
+                if (dtpngaydat.Value >= dtpngaynhan.Value)
+                {
+                    MessageBox.Show("Ngày đặt phải nhỏ hơn ngày nhận");
+                    return;
+                }
+
+                if (dtpngaynhan.Value >= dtpngaytra.Value)
+                {
+                    MessageBox.Show("Ngày nhận phải nhỏ hơn ngày trả");
+                    return;
+                }
+
                 bool trangThai = cbtrangthai.Text == "Đã xác nhận";
 
                 PhieuDatPhong_DAO dao = new PhieuDatPhong_DAO();

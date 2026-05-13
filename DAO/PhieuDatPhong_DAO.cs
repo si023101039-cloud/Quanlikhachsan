@@ -34,7 +34,7 @@ namespace QuanLyKhachSan.DAO
                         p.MaPhong,
                         p.TenPhong,
                         lp.TenLoaiPhong,
-                        lp.GiaTheoNgay,
+                        GiaTheoNgay = string.Format("{0:N0} VNĐ", lp.GiaTheoNgay),
                         p.TrangThai
                     }).ToList();
         }
@@ -63,7 +63,7 @@ namespace QuanLyKhachSan.DAO
                         ct.MaDatPhongCT,
                         ct.MaPhieuDatPhong,
                         p.TenPhong,
-                        ct.DonGia,
+                        DonGia = string.Format("{0:N0} VNĐ", ct.DonGia),
                         ct.NgayCheckInThucTe,
                         ct.NgayCheckOutThucTe
                     }).ToList();
