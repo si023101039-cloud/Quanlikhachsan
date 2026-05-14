@@ -211,35 +211,35 @@ namespace QuanLyKhachSan.GUI
 
         private void dgvPhieuDatPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row =
-                    dgvPhieuDatPhong.Rows[e.RowIndex];
+            //if (e.RowIndex >= 0)
+            //{
+            //    DataGridViewRow row =
+            //        dgvPhieuDatPhong.Rows[e.RowIndex];
 
-                txttenKH.Text =
-                    row.Cells["TenKH"].Value.ToString();
+            //    txttenKH.Text =
+            //        row.Cells["TenKH"].Value.ToString();
 
-                datengaydat.Value =
-                    Convert.ToDateTime(
-                        row.Cells["NgayDat"].Value);
+            //    datengaydat.Value =
+            //        Convert.ToDateTime(
+            //            row.Cells["NgayDat"].Value);
 
-                datengaynhan.Value =
-                    Convert.ToDateTime(
-                        row.Cells["NgayNhan"].Value);
+            //    datengaynhan.Value =
+            //        Convert.ToDateTime(
+            //            row.Cells["NgayNhan"].Value);
 
-                datengaytra.Value =
-                    Convert.ToDateTime(
-                        row.Cells["NgayTra"].Value);
+            //    datengaytra.Value =
+            //        Convert.ToDateTime(
+            //            row.Cells["NgayTra"].Value);
 
-               cbtrangthai.Text =
-                    Convert.ToBoolean(
-                        row.Cells["TrangThaiPhieu"].Value)
-                    ? "Đang thuê"
-                    : "Đã trả";
+            //   cbtrangthai.Text =
+            //        Convert.ToBoolean(
+            //            row.Cells["TrangThaiPhieu"].Value)
+            //        ? "Đang thuê"
+            //        : "Đã trả";
 
-                richghichu.Text =
-                    row.Cells["GhiChu"].Value?.ToString();
-            }
+            //    richghichu.Text =
+            //        row.Cells["GhiChu"].Value?.ToString();
+            //}
         }
 
         private void button1_Click(object sender, EventArgs e)//dat phong
@@ -320,10 +320,7 @@ namespace QuanLyKhachSan.GUI
             dgvCTPDP.DataSource = dao.LayDanhSachPhong();
         }
 
-        private void dgvPhieuDatPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
 
         private void dgvPhieuDatPhong_CellClick(object sender, DataGridViewCellEventArgs e)
         {

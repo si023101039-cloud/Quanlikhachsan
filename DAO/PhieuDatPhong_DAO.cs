@@ -11,25 +11,26 @@ namespace QuanLyKhachSan.DAO
     {
         MyDbContext db = new MyDbContext();
 
-        public object LayTatCaPhieu()
+        public List<object> LayTatCaPhieu()
         {
-            return (from p in db.PhieuDatPhongs
-                    join k in db.KhachHangs on p.MaKH equals k.MaKH
+            return (from p in db.PhieuDatPhong_Entities
+                    join k in db.KhachHang_Entities
+                    on p.MaKH equals k.MaKH
                     select new
                     {
                         p.MaPhieuDatPhong,
                         k.TenKH,
-                        p.NgayDat,
-                        p.NgayNhan,
-                        p.NgayTra,
-                        p.TrangThaiPhieu,
+                        NgayDat = p.NgayDat ?? DateTime.Now,
+                        NgayNhan = p.NgayNhan ?? DateTime.Now,
+                        NgayTra = p.NgayTra ?? DateTime.Now,
+                        TrangThaiPhieu = p.TrangThaiPhieu ?? false,
                         p.GhiChu
-                    }).ToList();
+                    }).ToList<object>();
         }
 
-        public object LayDanhSachPhong()
+        public List<object> LayDanhSachPhong()
         {
-            return (from p in db.Phongs
+            return (from p in db.Phong_Entities
                     join lp in db.LoaiPhong_Entities
                     on p.MaLoaiPhong equals lp.MaLoaiPhong
                     select new
@@ -38,13 +39,13 @@ namespace QuanLyKhachSan.DAO
                         p.TenPhong,
                         lp.TenLoaiPhong,
                         GiaTheoNgay = string.Format("{0:N0} VNĐ", lp.GiaTheoNgay),
-                        p.TrangThai
-                    }).ToList();
+                        TrangThai = p.TrangThai ?? false
+                    }).ToList<object>();
         }
 
-        public object LayDanhSachPhongTrong()
+        public List<object> LayDanhSachPhongTrong()
         {
-            return (from p in db.Phongs
+            return (from p in db.Phong_Entities
                     join lp in db.LoaiPhong_Entities
                     on p.MaLoaiPhong equals lp.MaLoaiPhong
                     where p.TrangThai == false
@@ -52,13 +53,13 @@ namespace QuanLyKhachSan.DAO
                     {
                         p.MaPhong,
                         p.TenPhong
-                    }).ToList();
+                    }).ToList<object>();
         }
 
-        public object LayChiTietTheoMa(int maPhieu)
+        public List<object> LayChiTietTheoMa(int maPhieu)
         {
-            return (from ct in db.ChiTietDatPhongs
-                    join p in db.Phongs
+            return (from ct in db.ChiTietDatPhong_Entities
+                    join p in db.Phong_Entities
                     on ct.MaPhong equals p.MaPhong
                     where ct.MaPhieuDatPhong == maPhieu
                     select new
@@ -69,178 +70,139 @@ namespace QuanLyKhachSan.DAO
                         DonGia = string.Format("{0:N0} VNĐ", ct.DonGia),
                         ct.NgayCheckInThucTe,
                         ct.NgayCheckOutThucTe
-                    }).ToList();
+                    }).ToList<object>();
         }
 
         public bool DatPhong(string tenKH, DateTime ngayDat, DateTime ngayNhan,
-                     DateTime ngayTra, string ghiChu, int maPhong, bool trangThai)
+                             DateTime ngayTra, string ghiChu, int maPhong, bool trangThai)
         {
             try
             {
-                var phong = db.Phongs.FirstOrDefault(x => x.MaPhong == maPhong);
+                var phong = db.Phong_Entities.FirstOrDefault(x => x.MaPhong == maPhong);
 
-                if (phong == null)
-                    return false;
+                if (phong == null) return false;
+                if (phong.TrangThai == true) return false;
+                if (string.IsNullOrWhiteSpace(tenKH)) return false;
+                if (ngayNhan >= ngayTra) return false;
 
-                if (phong.TrangThai == true)
-                    return false;
-
-                if (string.IsNullOrWhiteSpace(tenKH))
-                    return false;
-
-                if (ngayNhan >= ngayTra)
-                    return false;
-
-                KhachHang_DTO khach = new KhachHang_DTO();
-                khach.TenKH = tenKH.Trim();
-                khach.SDT = "";
-                khach.Email = "";
-                khach.GioiTinh = null;
-                khach.CCCD = "KH" + DateTime.Now.Ticks.ToString();
-
-                db.KhachHangs.Add(khach);
-                db.SaveChanges();
-
-                decimal gia = 0;
-
-                var loaiPhong = db.LoaiPhong_Entities
-                    .FirstOrDefault(x => x.MaLoaiPhong == phong.MaLoaiPhong);
-
-                if (loaiPhong != null)
+                var khach = new KhachHang_DTO
                 {
-                    gia = loaiPhong.GiaTheoNgay;
-                }
+                    TenKH = tenKH.Trim(),
+                    SDT = "",
+                    Email = "",
+                    GioiTinh = null,
+                    CCCD = "KH" + DateTime.Now.Ticks
+                };
 
-                PhieuDatPhong_DTO phieu = new PhieuDatPhong_DTO();
-                phieu.MaKH = khach.MaKH;
-                phieu.MaNV = 1;
-                phieu.NgayDat = ngayDat;
-                phieu.NgayNhan = ngayNhan;
-                phieu.NgayTra = ngayTra;
-                phieu.TrangThaiPhieu = trangThai;
-                phieu.GhiChu = ghiChu;
-
-                db.PhieuDatPhongs.Add(phieu);
+                db.KhachHang_Entities.Add(khach);
                 db.SaveChanges();
 
-                ChiTietDatPhong_DTO ct = new ChiTietDatPhong_DTO();
-                ct.MaPhieuDatPhong = phieu.MaPhieuDatPhong;
-                ct.MaPhong = maPhong;
-                ct.DonGia = gia;
-                ct.NgayCheckInThucTe = ngayNhan;
-                ct.NgayCheckOutThucTe = null;
+                var loaiPhong = db.LoaiPhong_Entities.FirstOrDefault(x => x.MaLoaiPhong == phong.MaLoaiPhong);
 
-                db.ChiTietDatPhongs.Add(ct);
+                decimal gia = loaiPhong?.GiaTheoNgay ?? 0;
+
+                var phieu = new PhieuDatPhong_DTO
+                {
+                    MaKH = khach.MaKH,
+                    MaNV = 1,
+                    NgayDat = ngayDat,
+                    NgayNhan = ngayNhan,
+                    NgayTra = ngayTra,
+                    TrangThaiPhieu = trangThai,
+                    GhiChu = ghiChu
+                };
+
+                db.PhieuDatPhong_Entities.Add(phieu);
+                db.SaveChanges();
+
+                var ct = new ChiTietDatPhong_DTO
+                {
+                    MaPhieuDatPhong = phieu.MaPhieuDatPhong,
+                    MaPhong = maPhong,
+                    DonGia = gia,
+                    NgayCheckInThucTe = ngayNhan,
+                    NgayCheckOutThucTe = null
+                };
+
+                db.ChiTietDatPhong_Entities.Add(ct);
 
                 phong.TrangThai = true;
-            
-            catch (Exception ex)
+
+                db.SaveChanges();
+
+                return true;
+            }
+            catch
             {
-                MessageBox.Show("Lỗi: " + ex.Message);
                 return false;
             }
         }
 
         public List<PhieuDatPhong_View> GetAllPhieuDatPhong()
         {
-            try
-            {
-                var data = (from pdp in db.PhieuDatPhong_Entities
-                            join kh in db.KhachHang_Entities
-                            on pdp.MaKH equals kh.MaKH
-                            select new PhieuDatPhong_View
-                            {
-                                MaPhieuDatPhong = pdp.MaPhieuDatPhong,
-                                MaKH = pdp.MaKH,
-                                TenKH = kh.TenKH,
-                                MaNV = pdp.MaNV,
-                                NgayDat = pdp.NgayDat,
-                                NgayNhan = pdp.NgayNhan,
-                                NgayTra = pdp.NgayTra,
-                                TrangThaiPhieu = pdp.TrangThaiPhieu,
-                                GhiChu = pdp.GhiChu
-                            }).ToList();
-
-                return data;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi: " + ex.Message);
-                return new List<PhieuDatPhong_View>();
-            }
+            return (from pdp in db.PhieuDatPhong_Entities
+                    join kh in db.KhachHang_Entities
+                    on pdp.MaKH equals kh.MaKH
+                    select new PhieuDatPhong_View
+                    {
+                        MaPhieuDatPhong = pdp.MaPhieuDatPhong,
+                        MaKH = kh.MaKH,
+                        TenKH = kh.TenKH,
+                        MaNV = pdp.MaNV ?? 0,
+                        NgayDat = pdp.NgayDat ?? DateTime.Now,
+                        NgayNhan = pdp.NgayNhan ?? DateTime.Now,
+                        NgayTra = pdp.NgayTra ?? DateTime.Now,
+                        TrangThaiPhieu = pdp.TrangThaiPhieu ?? false,
+                        GhiChu = pdp.GhiChu ?? ""
+                    }).ToList();
         }
 
-        // TRẢ PHÒNG
         public bool TraPhong(int maPhieuDatPhong)
         {
-            try
-            {
-                var phieu = db.PhieuDatPhong_Entities
-                              .Find(maPhieuDatPhong);
+            var phieu = db.PhieuDatPhong_Entities.Find(maPhieuDatPhong);
 
-                if (phieu != null)
-                {
-                    phieu.TrangThaiPhieu = false;
+            if (phieu == null) return false;
 
-                    db.SaveChanges();
+            phieu.TrangThaiPhieu = false;
 
-                    return true;
-                }
+            db.SaveChanges();
 
-                return false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi: " + ex.Message);
-                return false;
-            }
+            return true;
         }
 
-        // CẬP NHẬT TRẠNG THÁI PHÒNG
         public bool CapNhatTrangThaiPhong()
         {
-            try
+            var danhSachPhong = db.Phong_Entities.ToList();
+
+            foreach (var phong in danhSachPhong)
             {
-                var danhSachPhong = db.Phong_Entities.ToList();
+                bool dangSuDung = db.ChiTietDatPhong_Entities.Any(ct =>
+                    ct.MaPhong == phong.MaPhong &&
+                    ct.NgayCheckOutThucTe == null);
 
-                foreach (var phong in danhSachPhong)
-                {
-                    bool dangSuDung =
-                        db.ChiTietDatPhong_Entities.Any(ct =>
-                            ct.MaPhong == phong.MaPhong &&
-                            ct.NgayCheckOutThucTe == null);
-
-                    phong.TrangThai = dangSuDung;
-                }
-
-                db.SaveChanges();
-
-                return true;
+                phong.TrangThai = dangSuDung;
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
+
+            db.SaveChanges();
+
+            return true;
         }
-        // xem lịch sử đặt phòng
+
         public List<LichSuDatPhong_DTO> LayTatCaLichSu()
         {
-            var result = from nv in db.NhanVien_Entities
-                         from pdp in db.PhieuDatPhong_Entities
-                         from kh in db.KhachHang_Entities
-                         where nv.MaNV == pdp.MaNV && pdp.MaKH == kh.MaKH
-                         select new LichSuDatPhong_DTO
-                         {
-                             MaPhieuDatPhong = pdp.MaPhieuDatPhong,
-                             TenNV = nv.HoTen,
-                             TenKhachHang = kh.TenKH,
-                             NgayDat = pdp.NgayDat,
-                             NgayCheckIn = pdp.NgayNhan,
-                             NgayCheckOut = pdp.NgayTra,
-                         };
-
-            return result.ToList();
+            return (from nv in db.NhanVien_Entities
+                    from pdp in db.PhieuDatPhong_Entities
+                    from kh in db.KhachHang_Entities
+                    where nv.MaNV == pdp.MaNV && pdp.MaKH == kh.MaKH
+                    select new LichSuDatPhong_DTO
+                    {
+                        MaPhieuDatPhong = pdp.MaPhieuDatPhong,
+                        TenNV = nv.HoTen,
+                        TenKhachHang = kh.TenKH,
+                        NgayDat = pdp.NgayDat ?? DateTime.Now,
+                        NgayCheckIn = pdp.NgayNhan ?? DateTime.Now,
+                        NgayCheckOut = pdp.NgayTra ?? DateTime.Now
+                    }).ToList();
         }
     }
 }
