@@ -40,7 +40,7 @@ namespace QuanLyKhachSan.DAO
             {
                 try
                 {
-                    db.HoaDon_Entities.Add(hd);
+                    db.HoaDon_Entitiess.Add(hd);
 
                     var danhSachChiTiet = db.ChiTietDatPhong_Entities
                                             .Where(ct => ct.MaPhieuDatPhong == hd.MaPhieuDatPhong && ct.NgayCheckOutThucTe == null)

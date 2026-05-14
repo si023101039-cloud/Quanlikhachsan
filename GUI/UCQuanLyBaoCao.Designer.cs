@@ -102,6 +102,7 @@
             Load += UCQuanLyBaoCao_Load;
             ((System.ComponentModel.ISupportInitialize)chartBaoCao).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

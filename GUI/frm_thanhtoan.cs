@@ -3,8 +3,8 @@ using System.IO;
 using System.Windows.Forms;
 using QuanLyKhachSan.BUS;
 using QuanLyKhachSan.DTO;
-using OfficeOpenXml;
 using System.Diagnostics;
+using OfficeOpenXml;
 
 namespace QuanLyKhachSan.GUI
 {
@@ -173,6 +173,11 @@ namespace QuanLyKhachSan.GUI
         private void frm_thanhtoan_Load_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnXuatHoaDon_Click_1(object sender, EventArgs e)
+        {
+            OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
         }
     }
 }

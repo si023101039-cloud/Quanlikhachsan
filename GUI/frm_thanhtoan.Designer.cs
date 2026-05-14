@@ -62,6 +62,7 @@
             btnXuatHoaDon.TabIndex = 2;
             btnXuatHoaDon.Text = "Xuất hóa đơn";
             btnXuatHoaDon.UseVisualStyleBackColor = false;
+            btnXuatHoaDon.Click += btnXuatHoaDon_Click_1;
             // 
             // btnHuy
             // 

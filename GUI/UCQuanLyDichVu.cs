@@ -262,7 +262,9 @@ namespace QuanLyKhachSan.GUI
                 var chiTiet = db.ChiTietDatPhong_Entities
                                 .FirstOrDefault(ct => ct.MaPhong == maPhong && ct.NgayCheckOutThucTe == null);
 
-                return chiTiet != null ? (chiTiet.MaPhieuDatPhong ?? 0) : 0;
+                return (chiTiet != null && chiTiet.MaPhieuDatPhong.HasValue)
+                        ? chiTiet.MaPhieuDatPhong.Value
+                        : 0;
             }
         }
     }

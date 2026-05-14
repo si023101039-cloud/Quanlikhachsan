@@ -3,7 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +16,7 @@ namespace QuanLyKhachSan.GUI
 {
     public partial class UCQuanLyBaoCao : UserControl
     {
+        private baocaohieusuatsudungtungloaiphong_BUS _baoCaoBus = new baocaohieusuatsudungtungloaiphong_BUS();
         public UCQuanLyBaoCao()
         {
             InitializeComponent();
