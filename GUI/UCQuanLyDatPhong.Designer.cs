@@ -67,6 +67,7 @@
             dgvPhieuDatPhong.Size = new Size(680, 287);
             dgvPhieuDatPhong.TabIndex = 0;
             dgvPhieuDatPhong.CellClick += dgvPhieuDatPhong_CellClick;
+            dgvPhieuDatPhong.CellContentClick += dgvPhieuDatPhong_CellContentClick_1;
             // 
             // dgvCTPDP
             // 

@@ -33,17 +33,15 @@ namespace QuanLyKhachSan.GUI
 
             cbphong.DataSource = ds;
             cbphong.DisplayMember = "TenPhong";
-            cbphong.ValueMember = "MaPhong"; 
+            cbphong.ValueMember = "MaPhong";
 
             cbphong.SelectedIndex = -1;
         }
         private void LoadTrangThai()
         {
             cbtrangthai.Items.Clear();
-
-            cbtrangthai.Items.Add("Chờ xác nhận"); // 0
-            cbtrangthai.Items.Add("Đã xác nhận");  // 1
-
+            cbtrangthai.Items.Add("Đang thuê"); 
+            cbtrangthai.Items.Add("Đã trả");    
             cbtrangthai.SelectedIndex = 0;
         }
         private void UCQuanLyDatPhong_Load(object sender, EventArgs e)
@@ -251,7 +249,14 @@ namespace QuanLyKhachSan.GUI
                     MessageBox.Show("Chưa chọn phòng");
                     return;
                 }
-
+                if (cbtrangthai.Text == "Đã trả")
+                {
+                    MessageBox.Show("Không thể đặt phòng với trạng thái Đã trả!",
+                                    "Lỗi",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    return;
+                }
                 if (string.IsNullOrWhiteSpace(txtten.Text))
                 {
                     MessageBox.Show("Chưa nhập tên khách hàng");
@@ -276,7 +281,7 @@ namespace QuanLyKhachSan.GUI
                     return;
                 }
 
-                bool trangThai = cbtrangthai.Text == "Đã xác nhận";
+                bool trangThai = cbtrangthai.SelectedIndex == 0;
 
                 PhieuDatPhong_DAO dao = new PhieuDatPhong_DAO();
 
@@ -312,17 +317,16 @@ namespace QuanLyKhachSan.GUI
         {
             try
             {
+                PhieuDatPhong_DAO dao = new PhieuDatPhong_DAO();
+
                 if (dgvPhieuDatPhong.CurrentRow == null)
                 {
                     MessageBox.Show("Vui lòng chọn phiếu đặt phòng");
                     return;
                 }
 
-                int maPhieu =
-                    Convert.ToInt32(
-                        dgvPhieuDatPhong.CurrentRow
-                        .Cells["MaPhieuDatPhong"]
-                        .Value);
+                int maPhieu = Convert.ToInt32(
+                    dgvPhieuDatPhong.CurrentRow.Cells["MaPhieuDatPhong"].Value);
 
                 bool result = bus.TraPhong(maPhieu);
 
@@ -331,6 +335,20 @@ namespace QuanLyKhachSan.GUI
                     MessageBox.Show("Trả phòng thành công");
 
                     LoadDanhSach();
+                    LoadPhong();
+
+                    cbphong.SelectedIndex = -1;
+                    maPhongDuocChon = -1;
+
+                    cbphong.DataSource = null;
+                    cbphong.DataSource = dao.LayDanhSachPhongTrong();
+                    cbphong.DisplayMember = "TenPhong";
+                    cbphong.ValueMember = "MaPhong";
+
+                    dgvCTPDP.DataSource = null;
+
+                    if (cbtrangthai.Items.Count > 0)
+                        cbtrangthai.SelectedIndex = 1;
                 }
                 else
                 {
@@ -350,7 +368,7 @@ namespace QuanLyKhachSan.GUI
             dgvCTPDP.DataSource = dao.LayDanhSachPhong();
         }
 
-        
+
 
         private void dgvPhieuDatPhong_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -358,43 +376,27 @@ namespace QuanLyKhachSan.GUI
 
             DataGridViewRow r = dgvPhieuDatPhong.Rows[e.RowIndex];
 
-            if (r.Cells["TenKH"].Value != null)
-            {
-                txtten.Text = r.Cells["TenKH"].Value.ToString();
-            }
-            else
-            {
-                txtten.Text = "";
-            }
-
-            if (r.Cells["GhiChu"].Value != null)
-            {
-                txtghichu.Text = r.Cells["GhiChu"].Value.ToString();
-            }
-            else
-            {
-                txtghichu.Text = "";
-            }
+            txtten.Text = r.Cells["TenKH"].Value?.ToString() ?? "";
+            txtghichu.Text = r.Cells["GhiChu"].Value?.ToString() ?? "";
 
             if (r.Cells["NgayDat"].Value != null)
-            {
                 dtpngaydat.Value = Convert.ToDateTime(r.Cells["NgayDat"].Value);
-            }
 
             if (r.Cells["NgayNhan"].Value != null)
-            {
                 dtpngaynhan.Value = Convert.ToDateTime(r.Cells["NgayNhan"].Value);
-            }
 
             if (r.Cells["NgayTra"].Value != null)
-            {
                 dtpngaytra.Value = Convert.ToDateTime(r.Cells["NgayTra"].Value);
+
+            if (r.Cells["TrangThaiPhieu"].Value != null)
+            {
+                bool tt = Convert.ToBoolean(r.Cells["TrangThaiPhieu"].Value);
+                cbtrangthai.SelectedIndex = tt ? 0 : 1;
             }
 
             if (r.Cells["MaPhieuDatPhong"].Value != null)
             {
                 int maPhieu = Convert.ToInt32(r.Cells["MaPhieuDatPhong"].Value);
-
                 dgvCTPDP.DataSource = bus.LayChiTietTheoMa(maPhieu);
             }
         }
@@ -411,11 +413,13 @@ namespace QuanLyKhachSan.GUI
 
             dgvCTPDP.DataSource = null;
             dgvPhieuDatPhong.CurrentCell = null;
+
+            
         }
 
         private void dgvCTPDP_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void button3_Click(object sender, EventArgs e)//CAP NHAT TRANG THAI PHONG
@@ -443,6 +447,11 @@ namespace QuanLyKhachSan.GUI
             {
                 maPhongDuocChon = maPhong;
             }
+        }
+
+        private void dgvPhieuDatPhong_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

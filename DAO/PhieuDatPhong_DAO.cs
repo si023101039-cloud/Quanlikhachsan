@@ -74,7 +74,7 @@ namespace QuanLyKhachSan.DAO
         }
 
         public bool DatPhong(string tenKH, DateTime ngayDat, DateTime ngayNhan,
-                             DateTime ngayTra, string ghiChu, int maPhong, bool trangThai)
+                      DateTime ngayTra, string ghiChu, int maPhong, bool trangThai)
         {
             try
             {
@@ -108,7 +108,9 @@ namespace QuanLyKhachSan.DAO
                     NgayDat = ngayDat,
                     NgayNhan = ngayNhan,
                     NgayTra = ngayTra,
+   
                     TrangThaiPhieu = trangThai,
+
                     GhiChu = ghiChu
                 };
 
@@ -160,13 +162,22 @@ namespace QuanLyKhachSan.DAO
         public bool TraPhong(int maPhieuDatPhong)
         {
             var phieu = db.PhieuDatPhong_Entities.Find(maPhieuDatPhong);
-
             if (phieu == null) return false;
 
             phieu.TrangThaiPhieu = false;
 
-            db.SaveChanges();
+            var ct = db.ChiTietDatPhong_Entities
+                .FirstOrDefault(x => x.MaPhieuDatPhong == maPhieuDatPhong);
 
+            if (ct != null)
+            {
+                var phong = db.Phong_Entities.FirstOrDefault(p => p.MaPhong == ct.MaPhong);
+                if (phong != null) phong.TrangThai = false;
+
+                ct.NgayCheckOutThucTe = DateTime.Now;
+            }
+
+            db.SaveChanges();
             return true;
         }
 
