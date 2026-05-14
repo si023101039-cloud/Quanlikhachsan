@@ -89,6 +89,7 @@ namespace QuanLyKhachSan
             {
                 btnXemLSDP.Visible = false;
             }
+            btntennv.Text = _session.HoTen;
         }
 
         private void btnXemLSDP_Click(object sender, EventArgs e)

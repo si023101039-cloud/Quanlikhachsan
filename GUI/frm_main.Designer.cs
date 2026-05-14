@@ -31,9 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_main));
             panel1 = new Panel();
             pictureBox2 = new PictureBox();
-            button1 = new Button();
+            btntennv = new Button();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
+            btnXemLSDP = new Button();
             btnQuanLyLoaiPhong = new Button();
             btnQuanLyBaoCao = new Button();
             btnQuanLyDatPhong = new Button();
@@ -42,7 +43,6 @@
             panel3 = new Panel();
             lblpage = new Label();
             pnlMain = new Panel();
-            btnXemLSDP = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -54,7 +54,7 @@
             // 
             panel1.BackColor = Color.CornflowerBlue;
             panel1.Controls.Add(pictureBox2);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(btntennv);
             panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(-1, 0);
             panel1.Name = "panel1";
@@ -73,20 +73,20 @@
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;
             // 
-            // button1
+            // btntennv
             // 
-            button1.BackColor = Color.Orange;
-            button1.Cursor = Cursors.Hand;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(944, 19);
-            button1.Name = "button1";
-            button1.Size = new Size(183, 61);
-            button1.TabIndex = 1;
-            button1.Text = "    Trần Văn A";
-            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button1.UseVisualStyleBackColor = false;
+            btntennv.BackColor = Color.Orange;
+            btntennv.Cursor = Cursors.Hand;
+            btntennv.FlatAppearance.BorderSize = 0;
+            btntennv.FlatStyle = FlatStyle.Flat;
+            btntennv.Image = (Image)resources.GetObject("btntennv.Image");
+            btntennv.Location = new Point(944, 19);
+            btntennv.Name = "btntennv";
+            btntennv.Size = new Size(183, 61);
+            btntennv.TabIndex = 1;
+            btntennv.Text = "    Trần Văn A";
+            btntennv.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btntennv.UseVisualStyleBackColor = false;
             // 
             // pictureBox1
             // 
@@ -111,6 +111,22 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(188, 651);
             panel2.TabIndex = 1;
+            // 
+            // btnXemLSDP
+            // 
+            btnXemLSDP.BackColor = Color.Orange;
+            btnXemLSDP.Cursor = Cursors.Hand;
+            btnXemLSDP.FlatAppearance.BorderSize = 0;
+            btnXemLSDP.FlatStyle = FlatStyle.Flat;
+            btnXemLSDP.Image = (Image)resources.GetObject("btnXemLSDP.Image");
+            btnXemLSDP.Location = new Point(3, 471);
+            btnXemLSDP.Name = "btnXemLSDP";
+            btnXemLSDP.Size = new Size(182, 72);
+            btnXemLSDP.TabIndex = 8;
+            btnXemLSDP.Text = "Xem lịch sử đặt phòng";
+            btnXemLSDP.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnXemLSDP.UseVisualStyleBackColor = false;
+            btnXemLSDP.Click += btnXemLSDP_Click;
             // 
             // btnQuanLyLoaiPhong
             // 
@@ -218,22 +234,6 @@
             pnlMain.Size = new Size(1034, 651);
             pnlMain.TabIndex = 3;
             // 
-            // btnXemLSDP
-            // 
-            btnXemLSDP.BackColor = Color.Orange;
-            btnXemLSDP.Cursor = Cursors.Hand;
-            btnXemLSDP.FlatAppearance.BorderSize = 0;
-            btnXemLSDP.FlatStyle = FlatStyle.Flat;
-            btnXemLSDP.Image = (Image)resources.GetObject("btnXemLSDP.Image");
-            btnXemLSDP.Location = new Point(3, 471);
-            btnXemLSDP.Name = "btnXemLSDP";
-            btnXemLSDP.Size = new Size(182, 72);
-            btnXemLSDP.TabIndex = 8;
-            btnXemLSDP.Text = "Xem lịch sử đặt phòng";
-            btnXemLSDP.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnXemLSDP.UseVisualStyleBackColor = false;
-            btnXemLSDP.Click += btnXemLSDP_Click;
-            // 
             // frm_main
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
@@ -264,7 +264,7 @@
 
         private Panel panel1;
         private PictureBox pictureBox2;
-        private Button button1;
+        private Button btntennv;
         private PictureBox pictureBox1;
         private Panel panel2;
         private Panel panel3;

@@ -38,9 +38,9 @@
             txtMatKhau = new TextBox();
             pictureBox3 = new PictureBox();
             panel3 = new Panel();
-            pictureBox2 = new PictureBox();
             label1 = new Label();
             txtTaiKhoan = new TextBox();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -146,16 +146,6 @@
             panel3.Size = new Size(208, 2);
             panel3.TabIndex = 18;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(96, 16);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(91, 81);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 17;
-            pictureBox2.TabStop = false;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -174,6 +164,16 @@
             txtTaiKhoan.Size = new Size(208, 27);
             txtTaiKhoan.TabIndex = 15;
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(57, 6);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(172, 113);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 17;
+            pictureBox2.TabStop = false;
+            // 
             // frm_dangnhap
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
@@ -188,7 +188,7 @@
             Margin = new Padding(4);
             Name = "frm_dangnhap";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "frm_dangnhap";
+            Text = "Đăng Nhập";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -209,8 +209,8 @@
         private TextBox txtMatKhau;
         private PictureBox pictureBox3;
         private Panel panel3;
-        private PictureBox pictureBox2;
         private Label label1;
         private TextBox txtTaiKhoan;
+        private PictureBox pictureBox2;
     }
 }
