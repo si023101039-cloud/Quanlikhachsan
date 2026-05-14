@@ -74,69 +74,71 @@ namespace QuanLyKhachSan.DAO
         }
 
         public bool DatPhong(string tenKH, DateTime ngayDat, DateTime ngayNhan,
-                      DateTime ngayTra, string ghiChu, int maPhong, bool trangThai)
+                       DateTime ngayTra, string ghiChu, int maPhong)
         {
-            try
+            using (var transaction = db.Database.BeginTransaction())
             {
-                var phong = db.Phong_Entities.FirstOrDefault(x => x.MaPhong == maPhong);
-
-                if (phong == null) return false;
-                if (phong.TrangThai == true) return false;
-                if (string.IsNullOrWhiteSpace(tenKH)) return false;
-                if (ngayNhan >= ngayTra) return false;
-
-                var khach = new KhachHang_DTO
+                try
                 {
-                    TenKH = tenKH.Trim(),
-                    SDT = "",
-                    Email = "",
-                    GioiTinh = null,
-                    CCCD = "KH" + DateTime.Now.Ticks
-                };
+                    if (string.IsNullOrWhiteSpace(tenKH)) return false; if (ngayNhan >= ngayTra) return false;
 
-                db.KhachHang_Entities.Add(khach);
-                db.SaveChanges();
+                    var phong = db.Phong_Entities.FirstOrDefault(x => x.MaPhong == maPhong);
+                    if (phong == null || phong.TrangThai == true) return false;
 
-                var loaiPhong = db.LoaiPhong_Entities.FirstOrDefault(x => x.MaLoaiPhong == phong.MaLoaiPhong);
+                    var khach = new KhachHang_DTO
+                    {
+                        TenKH = tenKH.Trim(),
+                        SDT = null,
+                        Email = null,
+                        GioiTinh = null,
+                        CCCD = "KH" + DateTime.Now.Ticks
+                    };
 
-                decimal gia = loaiPhong?.GiaTheoNgay ?? 0;
+                    db.KhachHang_Entities.Add(khach);
+                    db.SaveChanges();
 
-                var phieu = new PhieuDatPhong_DTO
+                    var phieu = new PhieuDatPhong_DTO
+                    {
+                        MaKH = khach.MaKH,
+                        MaNV = null,
+                        NgayDat = ngayDat,
+                        NgayNhan = ngayNhan,
+                        NgayTra = ngayTra,
+                        TrangThaiPhieu = true,
+                        GhiChu = ghiChu
+                    };
+
+                    db.PhieuDatPhong_Entities.Add(phieu);
+                    db.SaveChanges();
+
+                    decimal gia = db.LoaiPhong_Entities
+                        .Where(x => x.MaLoaiPhong == phong.MaLoaiPhong)
+                        .Select(x => (decimal?)x.GiaTheoNgay)
+                        .FirstOrDefault() ?? 0;
+
+                    var ct = new ChiTietDatPhong_DTO
+                    {
+                        MaPhieuDatPhong = phieu.MaPhieuDatPhong,
+                        MaPhong = maPhong,
+                        DonGia = gia,
+                        NgayCheckInThucTe = ngayNhan,
+                        NgayCheckOutThucTe = null
+                    };
+
+                    db.ChiTietDatPhong_Entities.Add(ct);
+
+                    phong.TrangThai = true;
+
+                    db.SaveChanges();
+                    transaction.Commit();
+
+                    return true;
+                }
+                catch
                 {
-                    MaKH = khach.MaKH,
-                    MaNV = 1,
-                    NgayDat = ngayDat,
-                    NgayNhan = ngayNhan,
-                    NgayTra = ngayTra,
-
-                    TrangThaiPhieu = trangThai,
-
-                    GhiChu = ghiChu
-                };
-
-                db.PhieuDatPhong_Entities.Add(phieu);
-                db.SaveChanges();
-
-                var ct = new ChiTietDatPhong_DTO
-                {
-                    MaPhieuDatPhong = phieu.MaPhieuDatPhong,
-                    MaPhong = maPhong,
-                    DonGia = gia,
-                    NgayCheckInThucTe = ngayNhan,
-                    NgayCheckOutThucTe = null
-                };
-
-                db.ChiTietDatPhong_Entities.Add(ct);
-
-                phong.TrangThai = true;
-
-                db.SaveChanges();
-
-                return true;
-            }
-            catch
-            {
-                return false;
+                    transaction.Rollback();
+                    return false;
+                }
             }
         }
 
@@ -183,33 +185,20 @@ namespace QuanLyKhachSan.DAO
 
         public bool CapNhatTrangThaiPhong()
         {
-            try
+            var danhSachPhong = db.Phong_Entities.ToList();
+
+            foreach (var phong in danhSachPhong)
             {
-                var danhSachPhong = db.Phong_Entities.ToList();
+                bool dangSuDung = db.ChiTietDatPhong_Entities.Any(ct =>
+                    ct.MaPhong == phong.MaPhong &&
+                    ct.NgayCheckOutThucTe == null);
 
-                foreach (var phong in danhSachPhong)
-                {
-                    bool dangSuDung =
-                        (from ct in db.ChiTietDatPhong_Entities
-                         join pdp in db.PhieuDatPhong_Entities
-                         on ct.MaPhieuDatPhong equals pdp.MaPhieuDatPhong
-                         where ct.MaPhong == phong.MaPhong
-                         && pdp.TrangThaiPhieu == true
-                         && pdp.NgayNhan <= DateTime.Now
-                         && pdp.NgayTra >= DateTime.Now
-                         select ct).Any();
-
-                    phong.TrangThai = dangSuDung;
-                }
-
-                db.SaveChanges();
-
-                return true;
+                phong.TrangThai = dangSuDung;
             }
-            catch
-            {
-                return false;
-            }
+
+            db.SaveChanges();
+
+            return true;
         }
 
         public List<LichSuDatPhong_DTO> LayTatCaLichSu()

@@ -291,8 +291,7 @@ namespace QuanLyKhachSan.GUI
                     dtpngaynhan.Value,
                     dtpngaytra.Value,
                     txtghichu.Text,
-                    maPhongDuocChon,
-                    trangThai
+                    maPhongDuocChon
                 );
 
                 if (ketQua)
@@ -422,7 +421,7 @@ namespace QuanLyKhachSan.GUI
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)//CAP NHAT TRANG THAI PHONG
         {
             bool result = bus.CapNhatTrangThaiPhong();
 
