@@ -18,7 +18,7 @@ namespace QuanLyKhachSan.DAO
                 NgayXuatBaoCao = DateTime.Now
             };
 
-            var query = from hd in db.HoaDon_Entitiess
+            var query = from hd in db.HoaDon_Entities
                         join pdp in db.PhieuDatPhong_Entities on hd.MaPhieuDatPhong equals pdp.MaPhieuDatPhong
                         join kh in db.KhachHang_Entities on pdp.MaKH equals kh.MaKH
                         where hd.NgayThanhToan.Month == thang && hd.NgayThanhToan.Year == nam

@@ -108,7 +108,7 @@ namespace QuanLyKhachSan.DAO
                     NgayDat = ngayDat,
                     NgayNhan = ngayNhan,
                     NgayTra = ngayTra,
-   
+
                     TrangThaiPhieu = trangThai,
 
                     GhiChu = ghiChu
@@ -183,20 +183,33 @@ namespace QuanLyKhachSan.DAO
 
         public bool CapNhatTrangThaiPhong()
         {
-            var danhSachPhong = db.Phong_Entities.ToList();
-
-            foreach (var phong in danhSachPhong)
+            try
             {
-                bool dangSuDung = db.ChiTietDatPhong_Entities.Any(ct =>
-                    ct.MaPhong == phong.MaPhong &&
-                    ct.NgayCheckOutThucTe == null);
+                var danhSachPhong = db.Phong_Entities.ToList();
 
-                phong.TrangThai = dangSuDung;
+                foreach (var phong in danhSachPhong)
+                {
+                    bool dangSuDung =
+                        (from ct in db.ChiTietDatPhong_Entities
+                         join pdp in db.PhieuDatPhong_Entities
+                         on ct.MaPhieuDatPhong equals pdp.MaPhieuDatPhong
+                         where ct.MaPhong == phong.MaPhong
+                         && pdp.TrangThaiPhieu == true
+                         && pdp.NgayNhan <= DateTime.Now
+                         && pdp.NgayTra >= DateTime.Now
+                         select ct).Any();
+
+                    phong.TrangThai = dangSuDung;
+                }
+
+                db.SaveChanges();
+
+                return true;
             }
-
-            db.SaveChanges();
-
-            return true;
+            catch
+            {
+                return false;
+            }
         }
 
         public List<LichSuDatPhong_DTO> LayTatCaLichSu()

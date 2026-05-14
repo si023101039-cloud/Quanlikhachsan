@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using QuanLyKhachSan.BUS;
 namespace QuanLyKhachSan.GUI
 {
     public partial class UCQuanLyBaoCao : UserControl

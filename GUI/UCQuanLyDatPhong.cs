@@ -40,8 +40,8 @@ namespace QuanLyKhachSan.GUI
         private void LoadTrangThai()
         {
             cbtrangthai.Items.Clear();
-            cbtrangthai.Items.Add("Đang thuê"); 
-            cbtrangthai.Items.Add("Đã trả");    
+            cbtrangthai.Items.Add("Đang thuê");
+            cbtrangthai.Items.Add("Đã trả");
             cbtrangthai.SelectedIndex = 0;
         }
         private void UCQuanLyDatPhong_Load(object sender, EventArgs e)
@@ -414,7 +414,7 @@ namespace QuanLyKhachSan.GUI
             dgvCTPDP.DataSource = null;
             dgvPhieuDatPhong.CurrentCell = null;
 
-            
+
         }
 
         private void dgvCTPDP_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -422,7 +422,7 @@ namespace QuanLyKhachSan.GUI
 
         }
 
-        private void button3_Click(object sender, EventArgs e)//CAP NHAT TRANG THAI PHONG
+        private void button3_Click(object sender, EventArgs e)
         {
             bool result = bus.CapNhatTrangThaiPhong();
 
