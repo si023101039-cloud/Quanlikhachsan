@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using QuanLyKhachSan.BUS;
 using QuanLyKhachSan.DTO;
-//using OfficeOpenXml;
+using OfficeOpenXml;
 using System.Diagnostics;
 
 namespace QuanLyKhachSan.GUI
