@@ -28,59 +28,87 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            btnbaocaotyle = new Button();
+            btnbaocaodoanhthu = new Button();
+            btnbaocaohieusuat = new Button();
+            chartBaoCao = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)chartBaoCao).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // btnbaocaotyle
             // 
-            button1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            button1.Location = new Point(75, 241);
-            button1.Name = "button1";
-            button1.Size = new Size(188, 172);
-            button1.TabIndex = 0;
-            button1.Text = "Báo cáo tỷ lệ sử dụng phòng";
-            button1.UseVisualStyleBackColor = true;
+            btnbaocaotyle.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btnbaocaotyle.Location = new Point(39, 3);
+            btnbaocaotyle.Name = "btnbaocaotyle";
+            btnbaocaotyle.Size = new Size(188, 172);
+            btnbaocaotyle.TabIndex = 0;
+            btnbaocaotyle.Text = "Báo cáo tỷ lệ sử dụng phòng";
+            btnbaocaotyle.UseVisualStyleBackColor = true;
+            btnbaocaotyle.Click += button1_Click;
             // 
-            // button2
+            // btnbaocaodoanhthu
             // 
-            button2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.Location = new Point(420, 241);
-            button2.Name = "button2";
-            button2.Size = new Size(188, 172);
-            button2.TabIndex = 1;
-            button2.Text = "Báo cáo doanh thu theo tháng";
-            button2.UseVisualStyleBackColor = true;
+            btnbaocaodoanhthu.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnbaocaodoanhthu.Location = new Point(384, 3);
+            btnbaocaodoanhthu.Name = "btnbaocaodoanhthu";
+            btnbaocaodoanhthu.Size = new Size(188, 172);
+            btnbaocaodoanhthu.TabIndex = 1;
+            btnbaocaodoanhthu.Text = "Báo cáo doanh thu theo tháng";
+            btnbaocaodoanhthu.UseVisualStyleBackColor = true;
+            btnbaocaodoanhthu.Click += btnbaocaodoanhthu_Click;
             // 
-            // button3
+            // btnbaocaohieusuat
             // 
-            button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            button3.Location = new Point(765, 241);
-            button3.Name = "button3";
-            button3.Size = new Size(188, 172);
-            button3.TabIndex = 2;
-            button3.Text = "Báo cáo hiệu suất sử dụng từng loại phòng";
-            button3.UseVisualStyleBackColor = true;
+            btnbaocaohieusuat.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btnbaocaohieusuat.Location = new Point(729, 3);
+            btnbaocaohieusuat.Name = "btnbaocaohieusuat";
+            btnbaocaohieusuat.Size = new Size(188, 172);
+            btnbaocaohieusuat.TabIndex = 2;
+            btnbaocaohieusuat.Text = "Báo cáo hiệu suất sử dụng từng loại phòng";
+            btnbaocaohieusuat.UseVisualStyleBackColor = true;
+            btnbaocaohieusuat.Click += btnbaocaohieusuat_Click;
+            // 
+            // chartBaoCao
+            // 
+            chartArea1.Name = "ChartArea1";
+            chartBaoCao.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartBaoCao.Legends.Add(legend1);
+            chartBaoCao.Location = new Point(0, 287);
+            chartBaoCao.Name = "chartBaoCao";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chartBaoCao.Series.Add(series1);
+            chartBaoCao.Size = new Size(1034, 364);
+            chartBaoCao.TabIndex = 3;
+            chartBaoCao.Text = "chart1";
             // 
             // UCQuanLyBaoCao
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnbaocaohieusuat);
+            Controls.Add(btnbaocaodoanhthu);
+            Controls.Add(btnbaocaotyle);
+            Controls.Add(chartBaoCao);
             Font = new Font("Segoe UI", 12F);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "UCQuanLyBaoCao";
             Size = new Size(1034, 651);
+            Load += UCQuanLyBaoCao_Load;
+            ((System.ComponentModel.ISupportInitialize)chartBaoCao).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private Button btnbaocaotyle;
+        private Button btnbaocaodoanhthu;
+        private Button btnbaocaohieusuat;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartBaoCao;
     }
 }

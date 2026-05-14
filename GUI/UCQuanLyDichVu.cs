@@ -21,7 +21,7 @@ namespace QuanLyKhachSan.GUI
         {
             InitializeComponent();
 
-            
+
             this.Load += UCQuanLyDichVu_Load;
             btnThem.Click += BtnThem_Click;
             btnSua.Click += BtnSua_Click;
@@ -77,12 +77,12 @@ namespace QuanLyKhachSan.GUI
                 dgvLoaiPhong.Columns["TenDichVu"].HeaderText = "Tên Dịch Vụ";
                 dgvLoaiPhong.Columns["SoLuong"].HeaderText = "SL";
 
-                
+
                 dgvLoaiPhong.Columns["DonGia"].HeaderText = "Đơn Giá";
                 dgvLoaiPhong.Columns["DonGia"].DefaultCellStyle.Format = "N0";
                 dgvLoaiPhong.Columns["DonGia"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-                
+
                 dgvLoaiPhong.Columns["ThanhTien"].HeaderText = "Thành Tiền";
                 dgvLoaiPhong.Columns["ThanhTien"].DefaultCellStyle.Format = "N0";
                 dgvLoaiPhong.Columns["ThanhTien"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -123,7 +123,7 @@ namespace QuanLyKhachSan.GUI
             }
         }
 
-        
+
         private void BtnThanhToan_Click(object? sender, EventArgs e)
         {
             if (comboBox2.SelectedValue == null)
@@ -137,19 +137,19 @@ namespace QuanLyKhachSan.GUI
 
             if (maPhieu != 0)
             {
-                frm_thanhtoan frm = new frm_thanhtoan(maPhieu);               
+                frm_thanhtoan frm = new frm_thanhtoan(maPhieu);
                 frm.ShowDialog();
-               
 
-                
+
+
                 comboBox1.SelectedIndex = -1;
                 numericUpDown1.Value = 0;
                 numericUpDown2.Value = 0;
 
-                
-                phongBUS = new BUSQlyphong();            
+
+                phongBUS = new BUSQlyphong();
                 LoadComboBoxPhong();
-               
+
                 if (comboBox2.Items.Count == 0)
                 {
                     comboBox2.Text = "";
@@ -162,7 +162,7 @@ namespace QuanLyKhachSan.GUI
             }
         }
 
-       
+
         private void BtnThem_Click(object? sender, EventArgs e)
         {
             if (comboBox2.SelectedValue == null || comboBox1.SelectedValue == null)
@@ -171,7 +171,7 @@ namespace QuanLyKhachSan.GUI
                 return;
             }
 
-            
+
             if (numericUpDown2.Value <= 0)
             {
                 MessageBox.Show("Vui lòng chọn số lượng dịch vụ lớn hơn 0!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -180,17 +180,17 @@ namespace QuanLyKhachSan.GUI
 
             int maPhong = Convert.ToInt32(comboBox2.SelectedValue);
 
-            
+
             int? maDatPhongCT = ctdvBUS.LayMaDatPhongCT_HienTai(maPhong);
 
-            
+
             if (maDatPhongCT == null || maDatPhongCT == 0)
             {
                 MessageBox.Show("Phòng này hiện chưa có Phiếu Đặt Phòng (chưa Check-in hợp lệ)!\nVui lòng sang tab Quản lý đặt phòng để nhận phòng trước.", "Lỗi nghiệp vụ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            
+
             ChiTietDichVu_DTO moi = new ChiTietDichVu_DTO()
             {
                 MaDichVu = Convert.ToInt32(comboBox1.SelectedValue),
@@ -200,12 +200,12 @@ namespace QuanLyKhachSan.GUI
                 ThoiDiemSuDung = dateTimePicker2.Value
             };
 
-           
+
             if (ctdvBUS.Insert(moi))
             {
                 LoadDataGrid(maPhong);
 
-                
+
                 numericUpDown2.Value = 0;
 
                 MessageBox.Show("Thêm dịch vụ thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -233,8 +233,8 @@ namespace QuanLyKhachSan.GUI
             {
                 int maPhong = Convert.ToInt32(comboBox2.SelectedValue);
                 LoadDataGrid(maPhong);
-                numericUpDown2.Value = 0; 
-                currentMaCTDV = 0; 
+                numericUpDown2.Value = 0;
+                currentMaCTDV = 0;
             }
         }
 
@@ -248,8 +248,8 @@ namespace QuanLyKhachSan.GUI
                 {
                     int maPhong = Convert.ToInt32(comboBox2.SelectedValue);
                     LoadDataGrid(maPhong);
-                    numericUpDown2.Value = 0; 
-                    currentMaCTDV = 0; 
+                    numericUpDown2.Value = 0;
+                    currentMaCTDV = 0;
                 }
             }
         }

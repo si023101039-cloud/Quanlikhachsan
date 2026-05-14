@@ -215,5 +215,20 @@ namespace QuanLyKhachSan.DAO
                         NgayCheckOut = pdp.NgayTra ?? DateTime.Now
                     }).ToList();
         }
+        public List<dynamic> LayDuLieuDoanhThu()
+        {
+            using (var db = new MyDbContext())
+            {
+                return (from ct in db.ChiTietDatPhong_Entities
+                        join p in db.PhieuDatPhong_Entities on ct.MaPhieuDatPhong equals p.MaPhieuDatPhong
+                        where p.NgayDat != null
+                        group ct by p.NgayDat.Value.Month into g
+                        select new
+                        {
+                            Thang = "T" + g.Key,
+                            TongTien = (double)g.Sum(x => x.DonGia)
+                        }).ToList<dynamic>();
+            }
+        }
     }
 }
