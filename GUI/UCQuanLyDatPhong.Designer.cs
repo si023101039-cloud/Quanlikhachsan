@@ -37,9 +37,9 @@
             panel1 = new Panel();
             btnkiemtra = new Button();
             txtghichu = new RichTextBox();
-            button3 = new Button();
+            btncapnhattrangthai = new Button();
             cbtrangthai = new ComboBox();
-            button2 = new Button();
+            btntraphong = new Button();
             dtpngaynhan = new DateTimePicker();
             btndatphong = new Button();
             dtpngaytra = new DateTimePicker();
@@ -67,7 +67,6 @@
             dgvPhieuDatPhong.Size = new Size(680, 287);
             dgvPhieuDatPhong.TabIndex = 0;
             dgvPhieuDatPhong.CellClick += dgvPhieuDatPhong_CellClick;
-            //dgvPhieuDatPhong.CellContentClick += dgvPhieuDatPhong_CellContentClick;
             // 
             // dgvCTPDP
             // 
@@ -88,9 +87,9 @@
             groupBox1.Controls.Add(panel1);
             groupBox1.Controls.Add(btnkiemtra);
             groupBox1.Controls.Add(txtghichu);
-            groupBox1.Controls.Add(button3);
+            groupBox1.Controls.Add(btncapnhattrangthai);
             groupBox1.Controls.Add(cbtrangthai);
-            groupBox1.Controls.Add(button2);
+            groupBox1.Controls.Add(btntraphong);
             groupBox1.Controls.Add(dtpngaynhan);
             groupBox1.Controls.Add(btndatphong);
             groupBox1.Controls.Add(dtpngaytra);
@@ -177,20 +176,20 @@
             txtghichu.TabIndex = 17;
             txtghichu.Text = "";
             // 
-            // button3
+            // btncapnhattrangthai
             // 
-            button3.BackColor = Color.CornflowerBlue;
-            button3.Cursor = Cursors.Hand;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button3.Location = new Point(33, 551);
-            button3.Name = "button3";
-            button3.Size = new Size(273, 48);
-            button3.TabIndex = 8;
-            button3.Text = "Cập nhật trạng thái phòng";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
+            btncapnhattrangthai.BackColor = Color.CornflowerBlue;
+            btncapnhattrangthai.Cursor = Cursors.Hand;
+            btncapnhattrangthai.FlatAppearance.BorderSize = 0;
+            btncapnhattrangthai.FlatStyle = FlatStyle.Flat;
+            btncapnhattrangthai.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btncapnhattrangthai.Location = new Point(33, 551);
+            btncapnhattrangthai.Name = "btncapnhattrangthai";
+            btncapnhattrangthai.Size = new Size(273, 48);
+            btncapnhattrangthai.TabIndex = 8;
+            btncapnhattrangthai.Text = "Cập nhật trạng thái phòng";
+            btncapnhattrangthai.UseVisualStyleBackColor = false;
+            btncapnhattrangthai.Click += button3_Click;
             // 
             // cbtrangthai
             // 
@@ -201,20 +200,20 @@
             cbtrangthai.Size = new Size(177, 36);
             cbtrangthai.TabIndex = 16;
             // 
-            // button2
+            // btntraphong
             // 
-            button2.BackColor = Color.Red;
-            button2.Cursor = Cursors.Hand;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.Location = new Point(171, 413);
-            button2.Name = "button2";
-            button2.Size = new Size(152, 48);
-            button2.TabIndex = 7;
-            button2.Text = "Trả phòng";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            btntraphong.BackColor = Color.Red;
+            btntraphong.Cursor = Cursors.Hand;
+            btntraphong.FlatAppearance.BorderSize = 0;
+            btntraphong.FlatStyle = FlatStyle.Flat;
+            btntraphong.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btntraphong.Location = new Point(171, 413);
+            btntraphong.Name = "btntraphong";
+            btntraphong.Size = new Size(152, 48);
+            btntraphong.TabIndex = 7;
+            btntraphong.Text = "Trả phòng";
+            btntraphong.UseVisualStyleBackColor = false;
+            btntraphong.Click += button2_Click;
             // 
             // dtpngaynhan
             // 
@@ -394,8 +393,8 @@
         private DateTimePicker dtpngaydat;
         private Button btndatphong;
         private Button btnkiemtra;
-        private Button button3;
-        private Button button2;
+        private Button btncapnhattrangthai;
+        private Button btntraphong;
         private Panel panel1;
         private Button btnlammoi;
         private Label label9;

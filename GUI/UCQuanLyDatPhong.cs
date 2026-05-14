@@ -308,9 +308,39 @@ namespace QuanLyKhachSan.GUI
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)//traphong
         {
+            try
+            {
+                if (dgvPhieuDatPhong.CurrentRow == null)
+                {
+                    MessageBox.Show("Vui lòng chọn phiếu đặt phòng");
+                    return;
+                }
 
+                int maPhieu =
+                    Convert.ToInt32(
+                        dgvPhieuDatPhong.CurrentRow
+                        .Cells["MaPhieuDatPhong"]
+                        .Value);
+
+                bool result = bus.TraPhong(maPhieu);
+
+                if (result)
+                {
+                    MessageBox.Show("Trả phòng thành công");
+
+                    LoadDanhSach();
+                }
+                else
+                {
+                    MessageBox.Show("Trả phòng thất bại");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnkiemtra_Click(object sender, EventArgs e)
@@ -388,9 +418,18 @@ namespace QuanLyKhachSan.GUI
             
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)//CAP NHAT TRANG THAI PHONG
         {
+            bool result = bus.CapNhatTrangThaiPhong();
 
+            if (result)
+            {
+                MessageBox.Show("Cập nhật trạng thái phòng thành công");
+            }
+            else
+            {
+                MessageBox.Show("Cập nhật trạng thái phòng thất bại");
+            }
         }
 
         private void dgvCTPDP_CellContentClick(object sender, DataGridViewCellEventArgs e)
