@@ -12,8 +12,9 @@ namespace QuanLyKhachSan.DAO
 
         public List<DichVu_DTO> GetAllDichVu()
         {
-           
-            return db.DichVu_Entities.Where(dv => dv.TrangThai == true).ToList();
+            return db.DichVu_Entities
+                     .Where(dv => dv.TrangThai == true)
+                     .ToList();
         }
     }
 
@@ -21,7 +22,6 @@ namespace QuanLyKhachSan.DAO
     {
         private MyDbContext db = new MyDbContext();
 
-       
         public int? LayMaDatPhongCT_HienTai(int maPhong)
         {
             var chiTiet = db.ChiTietDatPhong_Entities
@@ -31,7 +31,7 @@ namespace QuanLyKhachSan.DAO
             {
                 return chiTiet.MaDatPhongCT;
             }
-            return null; 
+            return null;
         }
 
         public List<ChiTietDichVu_View> GetDichVuByPhong(int maPhong)
@@ -52,9 +52,10 @@ namespace QuanLyKhachSan.DAO
                                 DonGia = ctdv.DonGiaThoiDiemBan,
                                 ThoiDiemSuDung = ctdv.ThoiDiemSuDung
                             }).ToList();
+
                 return data;
             }
-            catch (Exception)
+            catch
             {
                 return new List<ChiTietDichVu_View>();
             }
@@ -67,7 +68,10 @@ namespace QuanLyKhachSan.DAO
                 db.ChiTietDichVu_Entities.Add(ctdv);
                 return db.SaveChanges() > 0;
             }
-            catch { return false; }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool Update(ChiTietDichVu_DTO ctdv)
@@ -75,17 +79,23 @@ namespace QuanLyKhachSan.DAO
             try
             {
                 var target = db.ChiTietDichVu_Entities.Find(ctdv.MaCTDV);
+
                 if (target != null)
                 {
                     target.MaDichVu = ctdv.MaDichVu;
                     target.SoLuong = ctdv.SoLuong;
                     target.DonGiaThoiDiemBan = ctdv.DonGiaThoiDiemBan;
                     target.ThoiDiemSuDung = ctdv.ThoiDiemSuDung;
+
                     return db.SaveChanges() > 0;
                 }
+
                 return false;
             }
-            catch { return false; }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool Delete(int maCTDV)
@@ -93,14 +103,19 @@ namespace QuanLyKhachSan.DAO
             try
             {
                 var target = db.ChiTietDichVu_Entities.Find(maCTDV);
+
                 if (target != null)
                 {
                     db.ChiTietDichVu_Entities.Remove(target);
                     return db.SaveChanges() > 0;
                 }
+
                 return false;
             }
-            catch { return false; }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

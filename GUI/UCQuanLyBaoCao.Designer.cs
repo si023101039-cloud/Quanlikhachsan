@@ -28,43 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            btnbaocaotyle = new Button();
+            btnbaocaodoanhthu = new Button();
             btnbaocaohieusuat = new Button();
-            bsdt = new Button();
-            bcdttheothang = new Button();
-            button3 = new Button();
-            cbxThang = new ComboBox();
-            txtNam = new TextBox();
-            label1 = new Label();
-            label2 = new Label();
+            chartBaoCao = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)chartBaoCao).BeginInit();
             SuspendLayout();
             // 
-            // bsdt
+            // btnbaocaotyle
             // 
-            bsdt.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            bsdt.Location = new Point(75, 241);
-            bsdt.Name = "bsdt";
-            bsdt.Size = new Size(188, 172);
-            bsdt.TabIndex = 0;
-            bsdt.Text = "Báo cáo tỷ lệ sử dụng phòng";
-            bsdt.UseVisualStyleBackColor = true;
+            btnbaocaotyle.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btnbaocaotyle.Location = new Point(39, 3);
+            btnbaocaotyle.Name = "btnbaocaotyle";
+            btnbaocaotyle.Size = new Size(188, 172);
+            btnbaocaotyle.TabIndex = 0;
+            btnbaocaotyle.Text = "Báo cáo tỷ lệ sử dụng phòng";
+            btnbaocaotyle.UseVisualStyleBackColor = true;
+            btnbaocaotyle.Click += button1_Click;
             // 
-            // bcdttheothang
+            // btnbaocaodoanhthu
             // 
-            bcdttheothang.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            bcdttheothang.Location = new Point(420, 241);
-            bcdttheothang.Name = "bcdttheothang";
-            bcdttheothang.Size = new Size(188, 172);
-            bcdttheothang.TabIndex = 1;
-            bcdttheothang.Text = "Báo cáo doanh thu theo tháng";
-            bcdttheothang.UseVisualStyleBackColor = true;
-            bcdttheothang.Click += bcdttheothang_Click;
+            btnbaocaodoanhthu.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnbaocaodoanhthu.Location = new Point(384, 3);
+            btnbaocaodoanhthu.Name = "btnbaocaodoanhthu";
+            btnbaocaodoanhthu.Size = new Size(188, 172);
+            btnbaocaodoanhthu.TabIndex = 1;
+            btnbaocaodoanhthu.Text = "Báo cáo doanh thu theo tháng";
+            btnbaocaodoanhthu.UseVisualStyleBackColor = true;
+            btnbaocaodoanhthu.Click += btnbaocaodoanhthu_Click;
             // 
             // btnbaocaohieusuat
             // 
             btnbaocaohieusuat.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            btnbaocaohieusuat.Location = new Point(765, 241);
+            btnbaocaohieusuat.Location = new Point(729, 3);
             btnbaocaohieusuat.Name = "btnbaocaohieusuat";
             btnbaocaohieusuat.Size = new Size(188, 172);
             btnbaocaohieusuat.TabIndex = 2;
@@ -72,75 +71,45 @@
             btnbaocaohieusuat.UseVisualStyleBackColor = true;
             btnbaocaohieusuat.Click += btnbaocaohieusuat_Click;
             // 
-            // cbxThang
+            // chartBaoCao
             // 
-            cbxThang.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxThang.FormattingEnabled = true;
-            cbxThang.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" });
-            cbxThang.Location = new Point(437, 446);
-            cbxThang.Name = "cbxThang";
-            cbxThang.Size = new Size(151, 36);
-            cbxThang.TabIndex = 3;
-            // 
-            // txtNam
-            // 
-            txtNam.Location = new Point(437, 515);
-            txtNam.Name = "txtNam";
-            txtNam.Size = new Size(151, 34);
-            txtNam.TabIndex = 4;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(420, 417);
-            label1.Name = "label1";
-            label1.Size = new Size(70, 28);
-            label1.TabIndex = 5;
-            label1.Text = "Tháng:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(423, 484);
-            label2.Name = "label2";
-            label2.Size = new Size(58, 28);
-            label2.TabIndex = 6;
-            label2.Text = "Năm:";
+            chartArea1.Name = "ChartArea1";
+            chartBaoCao.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartBaoCao.Legends.Add(legend1);
+            chartBaoCao.Location = new Point(0, 287);
+            chartBaoCao.Name = "chartBaoCao";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chartBaoCao.Series.Add(series1);
+            chartBaoCao.Size = new Size(1034, 364);
+            chartBaoCao.TabIndex = 3;
+            chartBaoCao.Text = "chart1";
             // 
             // UCQuanLyBaoCao
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(txtNam);
-            Controls.Add(cbxThang);
-            Controls.Add(bcdttheothang);
-            Controls.Add(bsdt);
             Controls.Add(btnbaocaohieusuat);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnbaocaodoanhthu);
+            Controls.Add(btnbaocaotyle);
+            Controls.Add(chartBaoCao);
             Font = new Font("Segoe UI", 12F);
             Margin = new Padding(4);
             Name = "UCQuanLyBaoCao";
             Size = new Size(1034, 651);
             Load += UCQuanLyBaoCao_Load;
+            ((System.ComponentModel.ISupportInitialize)chartBaoCao).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        // KHAI BÁO BIẾN - Quan trọng nhất để hết lỗi 'does not exist'
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnbaocaohieusuat;
-        private System.Windows.Forms.Button bsdt;
-        private System.Windows.Forms.Button bcdttheothang;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ComboBox cbxThang;
-        private System.Windows.Forms.TextBox txtNam;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private Button btnbaocaotyle;
+        private Button btnbaocaodoanhthu;
+        private Button btnbaocaohieusuat;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartBaoCao;
     }
 }

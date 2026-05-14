@@ -1,7 +1,6 @@
 using QuanLyKhachSan.DAO;
 using System;
 using QuanLyKhachSan.DTO;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,9 +36,20 @@ namespace QuanLyKhachSan.BUS
         {
             return phieuDatPhong_DAO.CapNhatTrangThaiPhong();
         }
+
         public List<LichSuDatPhong_DTO> LayTatCaLichSu()
         {
             return phieuDatPhong_DAO.LayTatCaLichSu();
+        }
+
+        public bool TrangThaiDangThue(bool check)
+        {
+            return check;
+        }
+
+        public bool TrangThaiDaTra(bool check)
+        {
+            return !check;
         }
     }
 }
