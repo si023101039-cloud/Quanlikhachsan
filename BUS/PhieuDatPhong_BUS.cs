@@ -32,11 +32,10 @@ namespace QuanLyKhachSan.BUS
             return phieuDatPhong_DAO.TraPhong(maPhieuDatPhong);
         }
 
-        public bool CapNhatTrangThaiPhong()
+        public bool CapNhatPhieu(PhieuDatPhong_DTO model)
         {
-            return phieuDatPhong_DAO.CapNhatTrangThaiPhong();
+            return phieuDatPhong_DAO.CapNhatPhieu(model);
         }
-
         public List<LichSuDatPhong_DTO> LayTatCaLichSu()
         {
             return phieuDatPhong_DAO.LayTatCaLichSu();

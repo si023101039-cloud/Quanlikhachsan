@@ -183,22 +183,55 @@ namespace QuanLyKhachSan.DAO
             return true;
         }
 
-        public bool CapNhatTrangThaiPhong()
+        public bool CapNhatPhieu(PhieuDatPhong_DTO model)
         {
-            var danhSachPhong = db.Phong_Entities.ToList();
-
-            foreach (var phong in danhSachPhong)
+            try
             {
-                bool dangSuDung = db.ChiTietDatPhong_Entities.Any(ct =>
-                    ct.MaPhong == phong.MaPhong &&
-                    ct.NgayCheckOutThucTe == null);
+                var phieu = db.PhieuDatPhong_Entities
+                    .FirstOrDefault(x => x.MaPhieuDatPhong == model.MaPhieuDatPhong);
 
-                phong.TrangThai = dangSuDung;
+                if (phieu == null)
+                    return false;
+
+                // cập nhật phiếu
+                phieu.NgayDat = model.NgayDat;
+                phieu.NgayNhan = model.NgayNhan;
+                phieu.NgayTra = model.NgayTra;
+                phieu.GhiChu = model.GhiChu;
+                phieu.TrangThaiPhieu = model.TrangThaiPhieu;
+
+                // cập nhật trạng thái phòng
+                var ct = db.ChiTietDatPhong_Entities
+                    .FirstOrDefault(x => x.MaPhieuDatPhong == model.MaPhieuDatPhong);
+
+                if (ct != null)
+                {
+                    var phong = db.Phong_Entities
+                        .FirstOrDefault(x => x.MaPhong == ct.MaPhong);
+
+                    if (phong != null)
+                    {
+                        phong.TrangThai = model.TrangThaiPhieu;
+
+                        // nếu trả phòng
+                        if (model.TrangThaiPhieu == false)
+                        {
+                            ct.NgayCheckOutThucTe = DateTime.Now;
+                        }
+                        else
+                        {
+                            ct.NgayCheckOutThucTe = null;
+                        }
+                    }
+                }
+
+                db.SaveChanges();
+                return true;
             }
-
-            db.SaveChanges();
-
-            return true;
+            catch
+            {
+                return false;
+            }
         }
 
         public List<LichSuDatPhong_DTO> LayTatCaLichSu()
