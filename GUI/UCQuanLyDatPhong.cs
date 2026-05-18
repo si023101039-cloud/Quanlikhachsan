@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QuanLyKhachSan.BUS;
 using QuanLyKhachSan.DAO;
 using QuanLyKhachSan.DTO;
 namespace QuanLyKhachSan.GUI
@@ -195,16 +194,7 @@ namespace QuanLyKhachSan.GUI
 
         private void btcapnhat_Click(object sender, EventArgs e)
         {
-            bool result = bus.CapNhatTrangThaiPhong();
-
-            if (result)
-            {
-                MessageBox.Show("Cập nhật trạng thái phòng thành công");
-            }
-            else
-            {
-                MessageBox.Show("Cập nhật trạng thái phòng thất bại");
-            }
+          
         }
 
         private void dgvPhieuDatPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -423,15 +413,46 @@ namespace QuanLyKhachSan.GUI
 
         private void button3_Click(object sender, EventArgs e)//CAP NHAT TRANG THAI PHONG
         {
-            bool result = bus.CapNhatTrangThaiPhong();
+            try
+            {
+                if (dgvPhieuDatPhong.CurrentRow == null)
+                {
+                    MessageBox.Show("Vui lòng chọn phiếu");
+                    return;
+                }
 
-            if (result)
-            {
-                MessageBox.Show("Cập nhật trạng thái phòng thành công");
+                int maPhieu = Convert.ToInt32(
+                    dgvPhieuDatPhong.CurrentRow
+                    .Cells["MaPhieuDatPhong"].Value);
+
+                PhieuDatPhong_DTO pdp = new PhieuDatPhong_DTO()
+                {
+                    MaPhieuDatPhong = maPhieu,
+                    NgayDat = dtpngaydat.Value,
+                    NgayNhan = dtpngaynhan.Value,
+                    NgayTra = dtpngaytra.Value,
+                    GhiChu = txtghichu.Text,
+                    TrangThaiPhieu =
+                        cbtrangthai.SelectedIndex == 0
+                };
+
+                bool result = bus.CapNhatPhieu(pdp);
+
+                if (result)
+                {
+                    MessageBox.Show("Cập nhật thành công");
+
+                    LoadDanhSach();
+                    LoadPhong();
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thất bại");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Cập nhật trạng thái phòng thất bại");
+                MessageBox.Show(ex.Message);
             }
         }
 

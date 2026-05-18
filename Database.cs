@@ -20,7 +20,7 @@ namespace QuanLyKhachSan
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                @"Server=MSI\SQLEXPRESS01;Database=Quanlikhachsan;Trusted_Connection=True;TrustServerCertificate=True;"
+                @"Server=LAPTOP-3R4OQCCK;Database=Quanlikhachsan;Trusted_Connection=True;TrustServerCertificate=True;"
             );
         }
     }
